@@ -1,0 +1,175 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Exam reading list</title><style>
+:root{--bg:#fff;--fg:#1b1b1b;--muted:#5f6368;--line:#dadce0;--link:#0b57d0;--chip:#e8f0fe;--chipfg:#174ea6}
+@media (prefers-color-scheme:dark){:root{--bg:#16181c;--fg:#e8eaed;--muted:#9aa0a6;--line:#3c4043;--link:#8ab4f8;--chip:#243049;--chipfg:#aecbfa}}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.55 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+main{max-width:760px;margin:0 auto;padding:32px 16px 64px}
+h1{font-size:1.9rem;margin:0 0 .6rem}h2{font-size:1.4rem;margin:2.4rem 0 .5rem;padding-top:1rem;border-top:1px solid var(--line)}
+h3{font-size:1.05rem;margin:1.6rem 0 .3rem;color:var(--muted);text-transform:uppercase;letter-spacing:.04em}
+a{color:var(--link);text-decoration:none}a:hover{text-decoration:underline}
+ul{padding-left:1.2rem;margin:.3rem 0}li{margin:.2rem 0}code{font:.9em Consolas,monospace;background:var(--chip);padding:0 .25em;border-radius:3px}
+.added{font-size:.72rem;background:var(--chip);color:var(--chipfg);padding:1px 7px;border-radius:99px;margin-left:.4rem;vertical-align:middle}
+p{margin:.5rem 0}
+</style></head><body><main><h1 id="exam-reading-list">Exam reading list</h1>
+<p>Docs pages for the LangChain Certified Agent Engineer exam, grouped by exam section. Section names, weights and focus areas come from the official exam guide. Pages marked <span class="added">added</span> are not referenced by any ticket in <a href="../BACKLOG.md">BACKLOG.md</a> but cover a focus area.</p>
+<p>Base URL: https://docs.langchain.com</p>
+<h2 id="contents">Contents</h2>
+<ul>
+<li><a href="#1-build">1. Build</a></li>
+<li><a href="#2-test">2. Test</a></li>
+<li><a href="#3-deploy">3. Deploy</a></li>
+<li><a href="#4-monitor">4. Monitor</a></li>
+</ul>
+<h2 id="1-build">1. Build</h2>
+<p>10 questions, 25% of score. Designing agents with create_agent and deepagents, and shaping the context they operate in.</p>
+<p><strong>Academy course:</strong> LangChain Foundations; Deep Agents Foundations</p>
+<p><strong>Focus areas:</strong></p>
+<ul>
+<li>Differences between <code>create_agent</code> and <code>deepagents</code></li>
+<li>Middleware</li>
+<li>Context engineering for long-running agents</li>
+<li><code>AGENTS.md</code> and <code>SKILL.md</code></li>
+<li>Sandboxing</li>
+</ul>
+<h3 id="langchain-create_agent">LangChain: create_agent</h3>
+<ul>
+<li><a href="https://docs.langchain.com/oss/python/langchain/overview" target="_blank" rel="noopener">LangChain overview</a> <span class="added">added</span></li>
+<li><a href="https://docs.langchain.com/oss/python/langchain/agents" target="_blank" rel="noopener">Agents</a></li>
+<li><a href="https://docs.langchain.com/oss/python/langchain/tools" target="_blank" rel="noopener">Tools</a></li>
+<li><a href="https://docs.langchain.com/oss/python/langchain/models" target="_blank" rel="noopener">Models</a></li>
+<li><a href="https://docs.langchain.com/oss/python/langchain/structured-output" target="_blank" rel="noopener">Structured output</a></li>
+<li><a href="https://docs.langchain.com/oss/python/langchain/runtime" target="_blank" rel="noopener">Runtime</a></li>
+<li><a href="https://docs.langchain.com/oss/python/langchain/short-term-memory" target="_blank" rel="noopener">Short-term memory</a></li>
+<li><a href="https://docs.langchain.com/oss/python/langchain/long-term-memory" target="_blank" rel="noopener">Long-term memory</a></li>
+<li><a href="https://docs.langchain.com/oss/python/langchain/context-engineering" target="_blank" rel="noopener">Context engineering in agents</a></li>
+<li><a href="https://docs.langchain.com/oss/python/langchain/human-in-the-loop" target="_blank" rel="noopener">Human-in-the-loop</a></li>
+<li><a href="https://docs.langchain.com/oss/python/releases/langchain-v1" target="_blank" rel="noopener">What's new in LangChain v1</a> <span class="added">added</span></li>
+</ul>
+<h3 id="langchain-middleware">LangChain: middleware</h3>
+<ul>
+<li><a href="https://docs.langchain.com/oss/python/langchain/middleware/overview" target="_blank" rel="noopener">Middleware overview</a></li>
+<li><a href="https://docs.langchain.com/oss/python/langchain/middleware/built-in" target="_blank" rel="noopener">Prebuilt middleware</a></li>
+<li><a href="https://docs.langchain.com/oss/python/langchain/middleware/custom" target="_blank" rel="noopener">Custom middleware</a></li>
+</ul>
+<h3 id="concepts-and-langgraph">Concepts and LangGraph</h3>
+<ul>
+<li><a href="https://docs.langchain.com/oss/python/concepts/context" target="_blank" rel="noopener">Context overview</a></li>
+<li><a href="https://docs.langchain.com/oss/python/concepts/human-in-the-loop" target="_blank" rel="noopener">Human-in-the-loop overview</a></li>
+<li><a href="https://docs.langchain.com/oss/python/langgraph/persistence" target="_blank" rel="noopener">Persistence</a></li>
+<li><a href="https://docs.langchain.com/oss/python/langgraph/interrupts" target="_blank" rel="noopener">Interrupts</a></li>
+<li><a href="https://docs.langchain.com/oss/python/langgraph/local-server" target="_blank" rel="noopener">Run a local server</a></li>
+<li><a href="https://docs.langchain.com/oss/python/langgraph/studio" target="_blank" rel="noopener">LangSmith Studio</a></li>
+</ul>
+<h3 id="deep-agents">Deep Agents</h3>
+<ul>
+<li><a href="https://docs.langchain.com/oss/python/deepagents/overview" target="_blank" rel="noopener">Deep Agents overview</a></li>
+<li><a href="https://docs.langchain.com/oss/python/deepagents/customization" target="_blank" rel="noopener">Customize Deep Agents</a></li>
+<li><a href="https://docs.langchain.com/oss/python/deepagents/memory" target="_blank" rel="noopener">Memory</a></li>
+<li><a href="https://docs.langchain.com/oss/python/deepagents/skills" target="_blank" rel="noopener">Skills</a></li>
+<li><a href="https://docs.langchain.com/oss/python/deepagents/backends" target="_blank" rel="noopener">Backends</a></li>
+<li><a href="https://docs.langchain.com/oss/python/deepagents/subagents" target="_blank" rel="noopener">Subagents</a></li>
+<li><a href="https://docs.langchain.com/oss/python/deepagents/context-engineering" target="_blank" rel="noopener">Context engineering in Deep Agents</a></li>
+<li><a href="https://docs.langchain.com/oss/python/deepagents/sandboxes" target="_blank" rel="noopener">Sandboxes</a></li>
+</ul>
+<h3 id="integrations">Integrations</h3>
+<ul>
+<li><a href="https://docs.langchain.com/oss/python/integrations/providers/openai" target="_blank" rel="noopener">OpenAI integrations</a></li>
+</ul>
+<h2 id="2-test">2. Test</h2>
+<p>10 questions, 25% of score. Choosing the right evaluator, running experiments, and reading results without overfitting to noise.</p>
+<p><strong>Academy course:</strong> Building Reliable Agents</p>
+<p><strong>Focus areas:</strong></p>
+<ul>
+<li>Code-based evaluators vs. LLM-as-judge</li>
+<li>Online vs. offline evaluators</li>
+<li>Running and interpreting experiments</li>
+<li>Evaluator alignment</li>
+<li>Adding examples to a dataset</li>
+</ul>
+<h3 id="langsmith-evaluation">LangSmith evaluation</h3>
+<ul>
+<li><a href="https://docs.langchain.com/langsmith/evaluation-concepts" target="_blank" rel="noopener">Evaluation concepts</a></li>
+<li><a href="https://docs.langchain.com/langsmith/evaluation-types" target="_blank" rel="noopener">Evaluation types</a></li>
+<li><a href="https://docs.langchain.com/langsmith/manage-datasets" target="_blank" rel="noopener">Manage datasets</a></li>
+<li><a href="https://docs.langchain.com/langsmith/evaluate-llm-application" target="_blank" rel="noopener">How to evaluate agents</a></li>
+<li><a href="https://docs.langchain.com/langsmith/code-evaluator-sdk" target="_blank" rel="noopener">How to define a code evaluator</a></li>
+<li><a href="https://docs.langchain.com/langsmith/llm-as-judge-sdk" target="_blank" rel="noopener">How to define an LLM-as-a-judge evaluator</a></li>
+<li><a href="https://docs.langchain.com/langsmith/experiment-configuration" target="_blank" rel="noopener">Experiment configuration</a></li>
+<li><a href="https://docs.langchain.com/langsmith/repetition" target="_blank" rel="noopener">How to evaluate with repetitions</a></li>
+<li><a href="https://docs.langchain.com/langsmith/compare-experiment-results" target="_blank" rel="noopener">How to compare experiment results</a></li>
+<li><a href="https://docs.langchain.com/langsmith/annotation-queues" target="_blank" rel="noopener">Use annotation queues</a></li>
+<li><a href="https://docs.langchain.com/langsmith/improve-judge-evaluator-feedback" target="_blank" rel="noopener">Improve LLM-as-judge evaluators using human feedback</a></li>
+<li><a href="https://docs.langchain.com/langsmith/create-few-shot-evaluators" target="_blank" rel="noopener">How to improve your evaluator with few-shot examples</a></li>
+<li><a href="https://docs.langchain.com/langsmith/pytest" target="_blank" rel="noopener">How to run evaluations with pytest</a></li>
+<li><a href="https://docs.langchain.com/langsmith/online-evaluations-code" target="_blank" rel="noopener">Set up online code evaluators</a> <span class="added">added</span></li>
+</ul>
+<h2 id="3-deploy">3. Deploy</h2>
+<p>10 questions, 25% of score. Shipping agents to LangSmith Deployment with the right primitives, isolation, and auth model.</p>
+<p><strong>Academy course:</strong> LangSmith Deployment Foundations</p>
+<p><strong>Focus areas:</strong></p>
+<ul>
+<li>Deployment terminology: graph, deployment, revision, assistant, thread, run</li>
+<li>Multi-region serving</li>
+<li>Secret handling</li>
+<li>Authentication vs. authorization</li>
+<li>Storage durability</li>
+</ul>
+<h3 id="architecture-and-deployment">Architecture and deployment</h3>
+<ul>
+<li><a href="https://docs.langchain.com/langsmith/control-plane" target="_blank" rel="noopener">LangSmith control plane</a> <span class="added">added</span></li>
+<li><a href="https://docs.langchain.com/langsmith/data-plane" target="_blank" rel="noopener">LangSmith data plane</a> <span class="added">added</span></li>
+<li><a href="https://docs.langchain.com/langsmith/agent-server-overview" target="_blank" rel="noopener">Agent Server</a></li>
+<li><a href="https://docs.langchain.com/langsmith/application-structure" target="_blank" rel="noopener">Application structure</a></li>
+<li><a href="https://docs.langchain.com/langsmith/cloud-platform-features" target="_blank" rel="noopener">Cloud platform features</a></li>
+<li><a href="https://docs.langchain.com/langsmith/deploy-to-cloud-overview" target="_blank" rel="noopener">Deploy to Cloud</a></li>
+<li><a href="https://docs.langchain.com/langsmith/deploy-to-cloud" target="_blank" rel="noopener">Create a deployment</a></li>
+<li><a href="https://docs.langchain.com/langsmith/env-var-cloud" target="_blank" rel="noopener">Cloud Agent Server environment variables</a></li>
+<li><a href="https://docs.langchain.com/langsmith/deployment-revisions" target="_blank" rel="noopener">Revisions</a></li>
+<li><a href="https://docs.langchain.com/langsmith/regions-faq" target="_blank" rel="noopener">Regions FAQ</a> <span class="added">added</span></li>
+<li><a href="https://docs.langchain.com/langsmith/byoc" target="_blank" rel="noopener">Bring Your Own Cloud (BYOC)</a> <span class="added">added</span></li>
+<li><a href="https://docs.langchain.com/langsmith/configure-ttl" target="_blank" rel="noopener">How to add TTLs to your application</a> <span class="added">added</span></li>
+</ul>
+<h3 id="assistants-threads-and-runs">Assistants, threads and runs</h3>
+<ul>
+<li><a href="https://docs.langchain.com/langsmith/assistants" target="_blank" rel="noopener">Assistants</a></li>
+<li><a href="https://docs.langchain.com/langsmith/use-threads" target="_blank" rel="noopener">Use threads</a></li>
+<li><a href="https://docs.langchain.com/langsmith/runs" target="_blank" rel="noopener">Runs</a></li>
+<li><a href="https://docs.langchain.com/langsmith/stateless-runs" target="_blank" rel="noopener">Stateless runs</a></li>
+<li><a href="https://docs.langchain.com/langsmith/add-human-in-the-loop" target="_blank" rel="noopener">Human-in-the-loop using server API</a></li>
+<li><a href="https://docs.langchain.com/langsmith/custom-routes" target="_blank" rel="noopener">How to add custom routes</a></li>
+<li><a href="https://docs.langchain.com/langsmith/use-remote-graph" target="_blank" rel="noopener">How to interact with a deployment using RemoteGraph</a></li>
+</ul>
+<h3 id="authentication-and-authorization">Authentication and authorization</h3>
+<ul>
+<li><a href="https://docs.langchain.com/langsmith/auth" target="_blank" rel="noopener">Authentication &amp; access control</a></li>
+<li><a href="https://docs.langchain.com/langsmith/custom-auth" target="_blank" rel="noopener">Add custom authentication</a></li>
+<li><a href="https://docs.langchain.com/langsmith/resource-auth" target="_blank" rel="noopener">Make conversations private</a></li>
+<li><a href="https://docs.langchain.com/langsmith/store-auth" target="_blank" rel="noopener">Isolate store data per user</a></li>
+</ul>
+<h2 id="4-monitor">4. Monitor</h2>
+<p>10 questions, 25% of score. Reading traces, attributing cost, and using Insights / Online Evals / Alerts in production.</p>
+<p><strong>Academy course:</strong> Monitoring Production Agents</p>
+<p><strong>Focus areas:</strong></p>
+<ul>
+<li>Reading traces</li>
+<li>Grouping traces into threads</li>
+<li>Tracking costs and user sentiment</li>
+<li>Online Evals vs. Insights</li>
+<li>Alerting</li>
+</ul>
+<h3 id="langsmith-observability">LangSmith observability</h3>
+<ul>
+<li><a href="https://docs.langchain.com/langsmith/observability-quickstart" target="_blank" rel="noopener">Tracing quickstart</a></li>
+<li><a href="https://docs.langchain.com/langsmith/trace-with-langgraph" target="_blank" rel="noopener">Trace LangGraph agents</a></li>
+<li><a href="https://docs.langchain.com/langsmith/add-metadata-tags" target="_blank" rel="noopener">Add metadata and tags to traces</a></li>
+<li><a href="https://docs.langchain.com/langsmith/threads" target="_blank" rel="noopener">Configure threads</a></li>
+<li><a href="https://docs.langchain.com/langsmith/cost-tracking" target="_blank" rel="noopener">Cost tracking</a></li>
+<li><a href="https://docs.langchain.com/langsmith/mask-inputs-outputs" target="_blank" rel="noopener">Prevent logging of sensitive data in traces</a></li>
+<li><a href="https://docs.langchain.com/langsmith/attach-user-feedback" target="_blank" rel="noopener">Log user feedback using the SDK</a></li>
+<li><a href="https://docs.langchain.com/langsmith/dashboards" target="_blank" rel="noopener">Monitor projects with dashboards</a></li>
+<li><a href="https://docs.langchain.com/langsmith/insights" target="_blank" rel="noopener">Discover errors and usage patterns with Insights</a></li>
+<li><a href="https://docs.langchain.com/langsmith/online-evaluations-llm-as-judge" target="_blank" rel="noopener">Set up LLM-as-a-judge online evaluators</a></li>
+<li><a href="https://docs.langchain.com/langsmith/online-evaluations-multi-turn" target="_blank" rel="noopener">Set up multi-turn online evaluators</a></li>
+<li><a href="https://docs.langchain.com/langsmith/rules" target="_blank" rel="noopener">Set up automation rules</a></li>
+<li><a href="https://docs.langchain.com/langsmith/alerts" target="_blank" rel="noopener">Alerts in LangSmith</a></li>
+</ul>
+</main></body></html>
