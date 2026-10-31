@@ -1,2 +1,4 @@
 # Licensed study material: never publish
 docs/study_guide.pdf
+.env
+ciste.db

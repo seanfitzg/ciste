@@ -1,0 +1,27 @@
+[project]
+name = "ciste"
+version = "0.1.0"
+description = "Learning project for the LangChain Certified Agent Engineer exam"
+readme = "README.md"
+authors = [
+    { name = "Seán Fitzgerald", email = "979399+seanfitzg@users.noreply.github.com" }
+]
+requires-python = ">=3.14"
+dependencies = [
+    "deepagents>=0.7.32",
+    "langchain>=1.4.7",
+    "langchain-openai>=1.7.3",
+    "langgraph>=1.2.19",
+    "langgraph-cli[inmem]>=0.4.40",
+    "langgraph-sdk>=0.4.11",
+    "langsmith>=0.14.16",
+    "pydantic>=2.14.2",
+    "pytest>=9.2.0",
+]
+
+[project.scripts]
+ciste = "ciste:main"
+
+[build-system]
+requires = ["uv_build>=0.13.5,<0.14.0"]
+build-backend = "uv_build"
