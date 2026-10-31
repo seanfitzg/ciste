@@ -240,6 +240,7 @@ dependencies = [
     { name = "langsmith" },
     { name = "pydantic" },
     { name = "pytest" },
+    { name = "python-dotenv" },
 ]
 
 [package.metadata]
@@ -253,6 +254,7 @@ requires-dist = [
     { name = "langsmith", specifier = ">=0.14.16" },
     { name = "pydantic", specifier = ">=2.14.2" },
     { name = "pytest", specifier = ">=9.2.0" },
+    { name = "python-dotenv", specifier = ">=1.2.4" },
 ]
 
 [[package]]
