@@ -129,7 +129,7 @@ These are prerequisites the developer doesn't write. Ask Claude for them before 
 - **Docs to read:** [Tracing quickstart](https://docs.langchain.com/langsmith/observability-quickstart); [Models](https://docs.langchain.com/oss/python/langchain/models); [OpenAI integrations](https://docs.langchain.com/oss/python/integrations/providers/openai); [Cost tracking](https://docs.langchain.com/langsmith/cost-tracking). Guide §4.1, §4.4.
 
 ### CIS-0-3 · Create the SQLite schema and deterministic seed script
-- **Epic:** 0 Project setup · **Exam section:** Build · **Estimate:** 2h · **Labels:** `owner-tbd` `epic-0` `build` `core`
+- **Epic:** 0 Project setup · **Exam section:** Build · **Estimate:** 2h · **Labels:** `claude` `epic-0` `build` `core`
 - **Depends on:** CIS-0-1, CIS-C-3
 - **Learning goal:** Python's `sqlite3`, dataclasses and seeded randomness. Deterministic data is what makes evaluation results comparable later.
 - **Description:** `ciste/db/schema.sql` plus `python -m ciste.db.seed`, which rebuilds `ciste.db` from `docs/seed_spec.md`. Tables: customers, accounts, cards, transactions (Merchant charges and Fees), fees catalogue (with FT section ID), refunds, disputes, escalations. Store full IBANs and card numbers, as a real bank would; masking comes in CIS-2-4.
