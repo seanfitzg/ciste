@@ -100,18 +100,18 @@ These are prerequisites the developer doesn't write. Ask Claude for them before 
 
 ## Epic 0 · Project setup
 
-### CIS-0-1 · Initialise the uv project and public GitHub repo
+### CIS-0-1 · Initialise the uv project in the public GitHub repo
 - **Epic:** 0 Project setup · **Exam section:** Build · **Estimate:** 1h · **Labels:** `epic-0` `build` `core`
 - **Depends on:** —
 - **Learning goal:** How `uv` manages the Python version, virtual environment, dependencies and lockfile, and how to keep secrets out of a public repo from the first commit.
-- **Description:** Create the project with `uv` using the layout in the handoff §4.1. Add the stack dependencies, write `.env.example` with names only, and extend the existing `.gitignore`. Create the public GitHub repo and push.
+- **Description:** The public repo already exists at [seanfitzg/ciste](https://github.com/seanfitzg/ciste), holding the planning files. Create the project with `uv` using the layout in the handoff §4.1. Add the stack dependencies, write `.env.example` with names only, extend the existing `.gitignore`, and push.
 - **Acceptance criteria:**
   - [ ] `uv sync` on a fresh clone installs `langchain`, `langchain-openai`, `langgraph`, `deepagents`, `langsmith`, `langgraph-cli[inmem]`, `langgraph-sdk`, `pydantic`, `pytest`
   - [ ] `.env.example` lists `OPENAI_API_KEY`, `LANGSMITH_TRACING`, `LANGSMITH_API_KEY`, `LANGSMITH_PROJECT` (and a commented `LANGSMITH_ENDPOINT` for non-US orgs) with no values
   - [ ] `git check-ignore .env ciste.db docs/study_guide.pdf` reports all three
-  - [ ] Public repo exists; its history contains no secrets and no PDF
+  - [ ] The repo's history still contains no secrets and no PDF
   - [ ] `uv run python -c "import ciste"` succeeds
-- **Hints:** `uv init`, `uv add`, `uv run`; `gh repo create --public`. The `[inmem]` extra is what `langgraph dev` needs.
+- **Hints:** `uv init`, `uv add`, `uv run`. The `[inmem]` extra is what `langgraph dev` needs.
 - **Docs to read:** Run a local server (`/oss/python/langgraph/local-server`) for the CLI install line. Guide §0.
 
 ### CIS-0-2 · Trace a first OpenAI call in LangSmith
