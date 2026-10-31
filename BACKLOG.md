@@ -1,6 +1,6 @@
 # Ciste Backlog
 
-Tickets for the Ciste support agent, a learning project for the LangChain Certified Agent Engineer exam. The developer writes all code by hand; tickets say *what* and *why*, with hints only.
+Tickets for the Ciste support agent, a learning project for the LangChain Certified Agent Engineer exam. Every ticket carries one ownership label (`by-hand`, `owner-tbd` or `claude`, below); tickets say *what* and *why*, with hints only.
 
 - **Vocabulary:** [GLOSSARY.md](GLOSSARY.md). Tickets use its terms (Customer, Fee, Refund cap, Reviewer, Confirmation, and so on).
 - **Decisions:** [ADR 0001](docs/adr/0001-dispute-investigator-invoked-in-process.md) (in-process investigator) and [ADR 0002](docs/adr/0002-customer-identity-from-auth-not-client-context.md) (identity from auth, not client context).
@@ -15,7 +15,9 @@ Tickets for the Ciste support agent, a learning project for the LangChain Certif
 | `stretch` | Depth, polish or portfolio value. Skip first when a week slips. |
 | `plus` | Needs LangSmith Plus. Treat as `stretch` until the Plus decision on **Mon 23 Nov 2026**. |
 | `prove-it` | Acceptance is something observed in LangSmith (trace, comparison view, thread total, alert payload). |
-| `content` | Drafted by Claude, not the developer. |
+| `by-hand` | Exam material: the developer writes every line. Claude only gives hints, explains or reviews. |
+| `owner-tbd` | Not exam material. Decide before starting whether the developer writes it or Claude does, then swap the label to `by-hand` or `claude`. |
+| `claude` | Claude does the work (for now, the non-code content drafts). |
 | `epic-N`, `build`, `test`, `deploy`, `monitor` | Epic and exam section. |
 
 ## Summary
@@ -82,17 +84,17 @@ These are hints that could not be confirmed in the docs. Each affected ticket st
 These are prerequisites the developer doesn't write. Ask Claude for them before the ticket that depends on them.
 
 ### CIS-C-1 · Draft the Fees and Terms document
-- **Labels:** `content` `epic-0`
+- **Labels:** `claude` `epic-0`
 - **Description:** `docs/fees_and_terms.md`: 7–8 short sections, each with an ID like `FT-3.2`. Fees must include one above €50 and one above €150 so both Tiers have over-cap Refund cases, plus overdraft, card replacement, international transfer and returned payment fees. It ends with a no-advice disclaimer section.
 - **Needed by:** CIS-1-2, CIS-0-3
 
 ### CIS-C-2 · Draft the dispute policy text
-- **Labels:** `content` `epic-3`
+- **Labels:** `claude` `epic-3`
 - **Description:** `policy/dispute_policy.md` (source for the `AGENTS.md` you write) and `policy/chargeback_reason_codes.md` (source for the skill's `references/` file): time limits, evidence rules, reason codes (duplicate, not received, fraud, chip-and-PIN authorised).
 - **Needed by:** CIS-3-1, CIS-3-2
 
 ### CIS-C-3 · Draft the seed-data specification
-- **Labels:** `content` `epic-0`
+- **Labels:** `claude` `epic-0`
 - **Description:** `docs/seed_spec.md`: tables, ~20 named Customers with Tiers, card patterns, transaction mix over 3 months, and the edge cases evals rely on: a duplicate merchant charge, a retail Fee > €50, a premium Fee > €150, an already-refunded Fee, a frozen Card, a chip-and-PIN transaction.
 - **Needed by:** CIS-0-3
 
@@ -101,7 +103,7 @@ These are prerequisites the developer doesn't write. Ask Claude for them before 
 ## Epic 0 · Project setup
 
 ### CIS-0-1 · Initialise the uv project in the public GitHub repo
-- **Epic:** 0 Project setup · **Exam section:** Build · **Estimate:** 1h · **Labels:** `epic-0` `build` `core`
+- **Epic:** 0 Project setup · **Exam section:** Build · **Estimate:** 1h · **Labels:** `owner-tbd` `epic-0` `build` `core`
 - **Depends on:** —
 - **Learning goal:** How `uv` manages the Python version, virtual environment, dependencies and lockfile, and how to keep secrets out of a public repo from the first commit.
 - **Description:** The public repo already exists at [seanfitzg/ciste](https://github.com/seanfitzg/ciste), holding the planning files. Create the project with `uv` using the layout in the handoff §4.1. Add the stack dependencies, write `.env.example` with names only, extend the existing `.gitignore`, and push.
@@ -115,7 +117,7 @@ These are prerequisites the developer doesn't write. Ask Claude for them before 
 - **Docs to read:** Run a local server (`/oss/python/langgraph/local-server`) for the CLI install line. Guide §0.
 
 ### CIS-0-2 · Trace a first OpenAI call in LangSmith
-- **Epic:** 0 Project setup · **Exam section:** Monitor · **Estimate:** 1h · **Labels:** `epic-0` `monitor` `core` `prove-it`
+- **Epic:** 0 Project setup · **Exam section:** Monitor · **Estimate:** 1h · **Labels:** `by-hand` `epic-0` `monitor` `core` `prove-it`
 - **Depends on:** CIS-0-1
 - **Learning goal:** Tracing turns on through environment variables alone, and the org's region decides whether `LANGSMITH_ENDPOINT` is needed.
 - **Description:** A tiny `scripts/hello.py` calls the capable model and the mini model through `init_chat_model`. Confirm both appear as traces with model name, tokens and cost. Choose and record the two model IDs.
@@ -127,7 +129,7 @@ These are prerequisites the developer doesn't write. Ask Claude for them before 
 - **Docs to read:** Tracing quickstart (`/langsmith/observability-quickstart`); Models (`/oss/python/langchain/models`); OpenAI integrations (`/oss/python/integrations/providers/openai`); Cost tracking (`/langsmith/cost-tracking`). Guide §4.1, §4.4.
 
 ### CIS-0-3 · Create the SQLite schema and deterministic seed script
-- **Epic:** 0 Project setup · **Exam section:** Build · **Estimate:** 2h · **Labels:** `epic-0` `build` `core`
+- **Epic:** 0 Project setup · **Exam section:** Build · **Estimate:** 2h · **Labels:** `owner-tbd` `epic-0` `build` `core`
 - **Depends on:** CIS-0-1, CIS-C-3
 - **Learning goal:** Python's `sqlite3`, dataclasses and seeded randomness. Deterministic data is what makes evaluation results comparable later.
 - **Description:** `ciste/db/schema.sql` plus `python -m ciste.db.seed`, which rebuilds `ciste.db` from `docs/seed_spec.md`. Tables: customers, accounts, cards, transactions (Merchant charges and Fees), fees catalogue (with FT section ID), refunds, disputes, escalations. Store full IBANs and card numbers, as a real bank would; masking comes in CIS-2-4.
@@ -141,7 +143,7 @@ These are prerequisites the developer doesn't write. Ask Claude for them before 
 - **Docs to read:** Python `sqlite3` docs (not on docs.langchain.com).
 
 ### CIS-0-4 · Write up Epic 0
-- **Epic:** 0 Project setup · **Exam section:** Build, Monitor · **Estimate:** 1h · **Labels:** `epic-0` `build` `monitor` `core`
+- **Epic:** 0 Project setup · **Exam section:** Build, Monitor · **Estimate:** 1h · **Labels:** `by-hand` `epic-0` `build` `monitor` `core`
 - **Depends on:** CIS-0-2, CIS-0-3
 - **Learning goal:** Turn setup surprises into revision notes while they're fresh.
 - **Description:** Start `docs/notes.md` with an Epic 0 section.
@@ -157,7 +159,7 @@ These are prerequisites the developer doesn't write. Ask Claude for them before 
 ## Epic 1 · Support agent core
 
 ### CIS-1-1 · Build get_account and list_transactions on runtime context
-- **Epic:** 1 Support agent core · **Exam section:** Build · **Estimate:** 2h · **Labels:** `epic-1` `build` `core`
+- **Epic:** 1 Support agent core · **Exam section:** Build · **Estimate:** 2h · **Labels:** `by-hand` `epic-1` `build` `core`
 - **Depends on:** CIS-0-3
 - **Learning goal:** Tools take the caller's identity from injected runtime context, never from arguments the model fills in.
 - **Description:** Define a `Context` (customer_id, tier) and one `resolve_customer(runtime)` helper (ADR 0002: context now, authenticated user from Epic 5). Write query helpers in `ciste/db/` and two tools that take `runtime: ToolRuntime[Context]`. `list_transactions` takes an optional date range and merchant filter and returns at most 50 rows.
@@ -171,7 +173,7 @@ These are prerequisites the developer doesn't write. Ask Claude for them before 
 - **Docs to read:** Tools (`/oss/python/langchain/tools`); Runtime (`/oss/python/langchain/runtime`); Context overview (`/oss/python/concepts/context`). Guide §1.5 "Runtime context vs state".
 
 ### CIS-1-2 · Add keyword search_terms over the Fees and Terms
-- **Epic:** 1 Support agent core · **Exam section:** Build · **Estimate:** 1h · **Labels:** `epic-1` `build` `core`
+- **Epic:** 1 Support agent core · **Exam section:** Build · **Estimate:** 1h · **Labels:** `owner-tbd` `epic-1` `build` `core`
 - **Depends on:** CIS-0-1, CIS-C-1
 - **Learning goal:** A tool's docstring and return shape are context engineering. Returning section IDs is what later lets an evaluator check citations.
 - **Description:** Split `docs/fees_and_terms.md` by section ID, rank sections by keyword overlap, and return the top two with their IDs.
@@ -183,7 +185,7 @@ These are prerequisites the developer doesn't write. Ask Claude for them before 
 - **Docs to read:** Tools (`/oss/python/langchain/tools`). Guide §1.1.
 
 ### CIS-1-3 · Implement issue_refund and escalate_to_human; stub open_dispute
-- **Epic:** 1 Support agent core · **Exam section:** Build · **Estimate:** 2h · **Labels:** `epic-1` `build` `core`
+- **Epic:** 1 Support agent core · **Exam section:** Build · **Estimate:** 2h · **Labels:** `by-hand` `epic-1` `build` `core`
 - **Depends on:** CIS-1-1
 - **Learning goal:** Tools that change state: returning a `Command` to update agent state, and `return_direct` to end a run.
 - **Description:** `issue_refund(fee_id, amount)` checks that the Fee belongs to the Customer, that the amount doesn't exceed the Fee, and that the Fee hasn't been refunded, then writes a refund row. The Refund cap is not checked here; that's middleware in CIS-2-3. `escalate_to_human(reason)` writes an Escalation row, marks the Conversation escalated in agent state, and ends the run. `open_dispute` returns a fake Dispute reference for now.
@@ -197,7 +199,7 @@ These are prerequisites the developer doesn't write. Ask Claude for them before 
 - **Docs to read:** Tools; Agents (`/oss/python/langchain/agents`); Short-term memory (`/oss/python/langchain/short-term-memory`). Guide §1.1.
 
 ### CIS-1-4 · Assemble the support agent and CLI chat loop
-- **Epic:** 1 Support agent core · **Exam section:** Build · **Estimate:** 2h · **Labels:** `epic-1` `build` `core`
+- **Epic:** 1 Support agent core · **Exam section:** Build · **Estimate:** 2h · **Labels:** `by-hand` `epic-1` `build` `core`
 - **Depends on:** CIS-1-1, CIS-1-2, CIS-1-3
 - **Learning goal:** `create_agent` compiles model, tools and system prompt into a LangGraph. A checkpointer plus a `thread_id` is what gives it memory across turns.
 - **Description:** `ciste/support_agent.py` exposes a factory that takes a model name, so evals can swap models. `cli.py` takes `--customer`, starts a new `thread_id` per session, and loops. The system prompt covers scope, citing FT section IDs, no legal or financial advice, and ignoring instructions in messages that try to override policy.
@@ -210,7 +212,7 @@ These are prerequisites the developer doesn't write. Ask Claude for them before 
 - **Docs to read:** Agents; Short-term memory; Persistence (`/oss/python/langgraph/persistence`). Guide §1.1.
 
 ### CIS-1-5 · Add freeze_card with a raw interrupt() Confirmation
-- **Epic:** 1 Support agent core · **Exam section:** Build · **Estimate:** 2h · **Labels:** `epic-1` `build` `stretch`
+- **Epic:** 1 Support agent core · **Exam section:** Build · **Estimate:** 2h · **Labels:** `by-hand` `epic-1` `build` `stretch`
 - **Depends on:** CIS-1-4
 - **Learning goal:** `interrupt()` is the primitive underneath HITL middleware. Writing it by hand shows what the middleware hides.
 - **Description:** `freeze_card(card_last4, freeze)` calls `interrupt()` with a Confirmation question, and the CLI resumes with the Customer's yes or no. Give the interrupt payload a `kind` field so the CLI can tell Confirmations from Reviewer Approvals (CIS-2-2).
@@ -222,7 +224,7 @@ These are prerequisites the developer doesn't write. Ask Claude for them before 
 - **Docs to read:** Interrupts (`/oss/python/langgraph/interrupts`); Human-in-the-loop overview (`/oss/python/concepts/human-in-the-loop`).
 
 ### CIS-1-6 · Prove the tool loop in LangSmith and write up Epic 1
-- **Epic:** 1 Support agent core · **Exam section:** Build, Monitor · **Estimate:** 1h · **Labels:** `epic-1` `build` `monitor` `core` `prove-it`
+- **Epic:** 1 Support agent core · **Exam section:** Build, Monitor · **Estimate:** 1h · **Labels:** `by-hand` `epic-1` `build` `monitor` `core` `prove-it`
 - **Depends on:** CIS-1-4
 - **Learning goal:** Reading an agent trace: which tools ran, in what order, with what inputs.
 - **Description:** Run one scripted Conversation and study its trace, then write up Epic 1.
@@ -237,7 +239,7 @@ These are prerequisites the developer doesn't write. Ask Claude for them before 
 ## Epic 2 · Middleware
 
 ### CIS-2-1 · Prove middleware execution order
-- **Epic:** 2 Middleware · **Exam section:** Build · **Estimate:** 1h · **Labels:** `epic-2` `build` `core` `prove-it`
+- **Epic:** 2 Middleware · **Exam section:** Build · **Estimate:** 1h · **Labels:** `by-hand` `epic-2` `build` `core` `prove-it`
 - **Depends on:** CIS-1-4
 - **Learning goal:** `before_*` hooks run first to last, `after_*` hooks last to first, and `wrap_*` hooks nest. This is a frequently tested fact.
 - **Description:** Lab 1 steps 2–3 on the Ciste agent. Two trivial middlewares, A and B, each log from `@before_model`, `@after_model` and `@wrap_model_call`. Run with `[A, B]`, then `[B, A]`.
@@ -248,7 +250,7 @@ These are prerequisites the developer doesn't write. Ask Claude for them before 
 - **Docs to read:** Middleware overview (`/oss/python/langchain/middleware/overview`); Custom middleware (`/oss/python/langchain/middleware/custom`). Guide §1.2, Lab 1.
 
 ### CIS-2-2 · Pause Refunds for Reviewer Approval with HITL
-- **Epic:** 2 Middleware · **Exam section:** Build · **Estimate:** 2h · **Labels:** `epic-2` `build` `core`
+- **Epic:** 2 Middleware · **Exam section:** Build · **Estimate:** 2h · **Labels:** `by-hand` `epic-2` `build` `core`
 - **Depends on:** CIS-1-4
 - **Learning goal:** `HumanInTheLoopMiddleware` interrupts before a tool runs, needs a checkpointer and a `thread_id`, and resumes with approve, edit or reject decisions.
 - **Description:** Put HITL on `issue_refund` only. Locally, the CLI shows a `[Reviewer]` prompt and resumes the run. The separate review command is CIS-5-4.
@@ -261,7 +263,7 @@ These are prerequisites the developer doesn't write. Ask Claude for them before 
 - **Docs to read:** Human-in-the-loop (`/oss/python/langchain/human-in-the-loop`); Prebuilt middleware (`/oss/python/langchain/middleware/built-in`). Guide §1.2.
 
 ### CIS-2-3 · Inject Tier with @dynamic_prompt and cap Refunds with @wrap_tool_call
-- **Epic:** 2 Middleware · **Exam section:** Build · **Estimate:** 2h · **Labels:** `epic-2` `build` `core`
+- **Epic:** 2 Middleware · **Exam section:** Build · **Estimate:** 2h · **Labels:** `by-hand` `epic-2` `build` `core`
 - **Depends on:** CIS-2-2
 - **Learning goal:** Writing two custom middlewares from scratch: one that shapes the prompt from runtime context, and one wrap-style hook that short-circuits a tool call.
 - **Description:** A `@dynamic_prompt` adds the Customer's Tier and Refund cap from context, never from the message. A `RefundCapGuard` `@wrap_tool_call` returns an error `ToolMessage` without calling the handler when `issue_refund`'s amount exceeds the cap. It runs at execution, after HITL, so it also catches a Reviewer's edit.
@@ -275,7 +277,7 @@ These are prerequisites the developer doesn't write. Ask Claude for them before 
 - **Docs to read:** Custom middleware; Runtime; Context engineering in agents (`/oss/python/langchain/context-engineering`). Guide §1.2, §1.5.
 
 ### CIS-2-4 · Catch the PII leak in a trace, then mask at source
-- **Epic:** 2 Middleware · **Exam section:** Build, Monitor · **Estimate:** 2h · **Labels:** `epic-2` `build` `monitor` `core` `prove-it`
+- **Epic:** 2 Middleware · **Exam section:** Build, Monitor · **Estimate:** 2h · **Labels:** `by-hand` `epic-2` `build` `monitor` `core` `prove-it`
 - **Depends on:** CIS-1-4
 - **Learning goal:** Middleware masks what the model sees, but traces record tool spans as they happened. Protecting data has to start at the source.
 - **Description:** Add `PIIMiddleware` for `credit_card` and a custom `iban` regex detector, using the mask strategy with input, output and tool results enabled. Ask "what's my IBAN?" and inspect the `get_account` tool span. Then make the query helpers return Masked values.
@@ -289,7 +291,7 @@ These are prerequisites the developer doesn't write. Ask Claude for them before 
 - **Docs to read:** Prebuilt middleware; Prevent logging of sensitive data in traces (`/langsmith/mask-inputs-outputs`). Guide §1.2.
 
 ### CIS-2-5 · Add tool retry, model call limit and summarization
-- **Epic:** 2 Middleware · **Exam section:** Build · **Estimate:** 2h · **Labels:** `epic-2` `build` `core`
+- **Epic:** 2 Middleware · **Exam section:** Build · **Estimate:** 2h · **Labels:** `by-hand` `epic-2` `build` `core`
 - **Depends on:** CIS-2-1
 - **Learning goal:** Matching built-in middleware to the problem: a flaky dependency needs retries, a runaway loop needs a call limit, a long chat needs summarization.
 - **Description:** Add `ToolRetryMiddleware` limited to database tools, with flakiness simulated by an env var (e.g. `CISTE_FLAKY_DB=0.3` raises `sqlite3.OperationalError`). Add `ModelCallLimitMiddleware(run_limit=...)`. Add `SummarizationMiddleware` on the mini model with a low message trigger so you can watch it fire.
@@ -302,7 +304,7 @@ These are prerequisites the developer doesn't write. Ask Claude for them before 
 - **Docs to read:** Prebuilt middleware. Guide §1.2, Lab 1 step 5.
 
 ### CIS-2-6 · Stop over-cap Refunds before they reach a Reviewer
-- **Epic:** 2 Middleware · **Exam section:** Build · **Estimate:** 2h · **Labels:** `epic-2` `build` `stretch`
+- **Epic:** 2 Middleware · **Exam section:** Build · **Estimate:** 2h · **Labels:** `by-hand` `epic-2` `build` `stretch`
 - **Depends on:** CIS-2-1, CIS-2-3
 - **Learning goal:** Middleware order in practice: an `after_model` guard only pre-empts HITL if it runs first.
 - **Description:** An `after_model` guard spots an over-cap `issue_refund` proposal and replaces it with a message to the model, so HITL never interrupts. Place it where CIS-2-1 predicted.
@@ -314,7 +316,7 @@ These are prerequisites the developer doesn't write. Ask Claude for them before 
 - **Docs to read:** Custom middleware; Human-in-the-loop. Guide §1.2.
 
 ### CIS-2-7 · Write up Epic 2 with Lab 1 answers
-- **Epic:** 2 Middleware · **Exam section:** Build · **Estimate:** 1h · **Labels:** `epic-2` `build` `core`
+- **Epic:** 2 Middleware · **Exam section:** Build · **Estimate:** 1h · **Labels:** `by-hand` `epic-2` `build` `core`
 - **Depends on:** CIS-2-1 … CIS-2-5
 - **Learning goal:** Consolidate middleware facts as exam revision notes.
 - **Description:** Epic 2 section in `docs/notes.md`.
@@ -330,7 +332,7 @@ These are prerequisites the developer doesn't write. Ask Claude for them before 
 ## Epic 3 · Dispute Investigator
 
 ### CIS-3-1 · Scaffold the Dispute Investigator with AGENTS.md and DisputeReport
-- **Epic:** 3 Dispute Investigator · **Exam section:** Build · **Estimate:** 2h · **Labels:** `epic-3` `build` `core`
+- **Epic:** 3 Dispute Investigator · **Exam section:** Build · **Estimate:** 2h · **Labels:** `by-hand` `epic-3` `build` `core`
 - **Depends on:** CIS-1-1, CIS-C-2
 - **Learning goal:** What the Deep Agents harness adds over `create_agent`, `AGENTS.md` as always-loaded memory, and `response_format` for typed output.
 - **Description:** `ciste/dispute/investigator.py` uses `create_deep_agent` with a `FilesystemBackend` rooted at `ciste/dispute/` (`virtual_mode=True`), `memory=["/AGENTS.md"]` and `response_format=DisputeReport` (in `ciste/schemas.py`). You write a short `AGENTS.md` from `policy/dispute_policy.md`. Give it one read-only tool for the context Customer's transactions.
@@ -342,7 +344,7 @@ These are prerequisites the developer doesn't write. Ask Claude for them before 
 - **Docs to read:** Deep Agents overview (`/oss/python/deepagents/overview`); Customize Deep Agents (`/oss/python/deepagents/customization`); Memory (`/oss/python/deepagents/memory`); Backends (`/oss/python/deepagents/backends`); Structured output (`/oss/python/langchain/structured-output`). Guide §1.3, §1.4, §1.6.
 
 ### CIS-3-2 · Add the chargeback-rules skill and prove progressive disclosure
-- **Epic:** 3 Dispute Investigator · **Exam section:** Build · **Estimate:** 2h · **Labels:** `epic-3` `build` `core` `prove-it`
+- **Epic:** 3 Dispute Investigator · **Exam section:** Build · **Estimate:** 2h · **Labels:** `by-hand` `epic-3` `build` `core` `prove-it`
 - **Depends on:** CIS-3-1
 - **Learning goal:** The three loading levels of a skill (metadata, instructions, resources) and the frontmatter rules.
 - **Description:** You write `skills/chargeback-rules/SKILL.md` (with `name` matching the directory and a specific `description`) and `references/reason-codes.md` from `policy/chargeback_reason_codes.md`. Pass `skills=["/skills/"]`.
@@ -354,7 +356,7 @@ These are prerequisites the developer doesn't write. Ask Claude for them before 
 - **Docs to read:** Skills (`/oss/python/deepagents/skills`). Guide §1.6, Lab 2.
 
 ### CIS-3-3 · Add the transaction-analyst subagent and observe offloading
-- **Epic:** 3 Dispute Investigator · **Exam section:** Build · **Estimate:** 2h · **Labels:** `epic-3` `build` `core` `prove-it`
+- **Epic:** 3 Dispute Investigator · **Exam section:** Build · **Estimate:** 2h · **Labels:** `by-hand` `epic-3` `build` `core` `prove-it`
 - **Depends on:** CIS-3-1
 - **Learning goal:** Subagents isolate context and don't inherit skills; tool results over about 20,000 tokens are offloaded to the filesystem.
 - **Description:** Add a `transaction-analyst` subagent dict with its own tools, including `export_transactions`, which returns the full 3-month history verbosely (over 20,000 tokens). The investigator delegates to it through the `task` tool.
@@ -367,7 +369,7 @@ These are prerequisites the developer doesn't write. Ask Claude for them before 
 - **Docs to read:** Subagents (`/oss/python/deepagents/subagents`); Context engineering in Deep Agents (`/oss/python/deepagents/context-engineering`). Guide §1.3, §1.5.
 
 ### CIS-3-4 · Remember per-customer notes across threads with /memories/
-- **Epic:** 3 Dispute Investigator · **Exam section:** Build · **Estimate:** 2h · **Labels:** `epic-3` `build` `core`
+- **Epic:** 3 Dispute Investigator · **Exam section:** Build · **Estimate:** 2h · **Labels:** `by-hand` `epic-3` `build` `core`
 - **Depends on:** CIS-3-1
 - **Learning goal:** A filesystem in agent state lasts one thread; durable memory needs a `CompositeBackend` route to a `StoreBackend`.
 - **Description:** Wrap the backend in a `CompositeBackend` that routes `/memories/` to a `StoreBackend` namespaced by Customer (from `resolve_customer`). The investigator saves a note after each Dispute.
@@ -379,7 +381,7 @@ These are prerequisites the developer doesn't write. Ask Claude for them before 
 - **Docs to read:** Backends; Memory; Long-term memory (`/oss/python/langchain/long-term-memory`). Guide §1.3, practice Q10.
 
 ### CIS-3-5 · Wire open_dispute to the investigator in-process
-- **Epic:** 3 Dispute Investigator · **Exam section:** Build · **Estimate:** 2h · **Labels:** `epic-3` `build` `core`
+- **Epic:** 3 Dispute Investigator · **Exam section:** Build · **Estimate:** 2h · **Labels:** `by-hand` `epic-3` `build` `core`
 - **Depends on:** CIS-3-1, CIS-1-3
 - **Learning goal:** Composing graphs: a tool that invokes a compiled graph and passes runtime context and config through (ADR 0001).
 - **Description:** Replace the stub. `open_dispute` invokes the investigator with the transaction, the reason and the same Customer. It saves a Dispute row with status `open` and the report JSON, and returns only the Dispute reference.
@@ -391,7 +393,7 @@ These are prerequisites the developer doesn't write. Ask Claude for them before 
 - **Docs to read:** Runtime; Trace LangGraph agents. Guide §1.1 "Embedding an agent", ADR 0001.
 
 ### CIS-3-6 · Run an analysis script in a sandbox backend
-- **Epic:** 3 Dispute Investigator · **Exam section:** Build · **Estimate:** 3h · **Labels:** `epic-3` `build` `stretch`
+- **Epic:** 3 Dispute Investigator · **Exam section:** Build · **Estimate:** 3h · **Labels:** `by-hand` `epic-3` `build` `stretch`
 - **Depends on:** CIS-3-3
 - **Learning goal:** Sandbox-as-a-tool, the `execute` tool, the never-put-secrets-inside rule, and sandbox lifecycle.
 - **Description:** The analyst runs a small script in a sandbox backend to compute merchant frequency for the disputed period.
@@ -402,7 +404,7 @@ These are prerequisites the developer doesn't write. Ask Claude for them before 
 - **Docs to read:** Sandboxes (`/oss/python/deepagents/sandboxes`). Guide §1.7.
 
 ### CIS-3-7 · Write up Epic 3 with Lab 2 answers
-- **Epic:** 3 Dispute Investigator · **Exam section:** Build · **Estimate:** 1h · **Labels:** `epic-3` `build` `core`
+- **Epic:** 3 Dispute Investigator · **Exam section:** Build · **Estimate:** 1h · **Labels:** `by-hand` `epic-3` `build` `core`
 - **Depends on:** CIS-3-2 … CIS-3-5
 - **Learning goal:** Consolidate Deep Agents facts as exam revision notes.
 - **Description:** Epic 3 section in `docs/notes.md`.
@@ -418,7 +420,7 @@ These are prerequisites the developer doesn't write. Ask Claude for them before 
 ## Epic 4 · Offline evaluation
 
 ### CIS-4-1 · Build the eval dataset and a target that handles interrupts
-- **Epic:** 4 Offline evaluation · **Exam section:** Test · **Estimate:** 2h · **Labels:** `epic-4` `test` `core`
+- **Epic:** 4 Offline evaluation · **Exam section:** Test · **Estimate:** 2h · **Labels:** `by-hand` `epic-4` `test` `core`
 - **Depends on:** CIS-2-3, CIS-3-5
 - **Learning goal:** What a dataset example is (inputs, reference outputs, metadata), and how to turn an agent that pauses into something you can score.
 - **Description:** `evals/dataset_seed.py` creates `ciste-support-v1` with 25–30 examples. Metadata holds `category` (fee_question, refund_ok, refund_over_limit, dispute, injection, escalation), `customer_id` and `tier`. The target runs each example on a fresh thread. If HITL interrupts, it returns the proposed refund arguments as `pending_refund` instead of approving. The target's output holds final text, tool calls, `pending_refund` and `escalated`.
@@ -431,7 +433,7 @@ These are prerequisites the developer doesn't write. Ask Claude for them before 
 - **Docs to read:** Manage datasets (`/langsmith/manage-datasets`); How to evaluate agents (`/langsmith/evaluate-llm-application`); Evaluation concepts (`/langsmith/evaluation-concepts`). Guide §2.1, §2.5.
 
 ### CIS-4-2 · Write the code evaluators
-- **Epic:** 4 Offline evaluation · **Exam section:** Test · **Estimate:** 2h · **Labels:** `epic-4` `test` `core`
+- **Epic:** 4 Offline evaluation · **Exam section:** Test · **Estimate:** 2h · **Labels:** `by-hand` `epic-4` `test` `core`
 - **Depends on:** CIS-4-1
 - **Learning goal:** Anything checkable by rules belongs in a code evaluator: cheap, deterministic, repeatable.
 - **Description:** `evals/evaluators.py`: `refund_within_cap` (uses the example's Tier), `no_unmasked_pii`, `escalated_when_asked`, `cites_valid_section` (ID exists in the Fees and Terms), `dispute_recommendation_not_leaked`.
@@ -442,7 +444,7 @@ These are prerequisites the developer doesn't write. Ask Claude for them before 
 - **Docs to read:** How to define a code evaluator (SDK) (`/langsmith/code-evaluator-sdk`). Guide §2.3.
 
 ### CIS-4-3 · Write LLM-as-judge evaluators on the mini model
-- **Epic:** 4 Offline evaluation · **Exam section:** Test · **Estimate:** 2h · **Labels:** `epic-4` `test` `core`
+- **Epic:** 4 Offline evaluation · **Exam section:** Test · **Estimate:** 2h · **Labels:** `by-hand` `epic-4` `test` `core`
 - **Depends on:** CIS-4-1
 - **Learning goal:** LLM judges cover what rules can't, such as tone and semantic correctness, and need structured scores and visible reasoning.
 - **Description:** A reference-free `helpfulness_tone` judge and a `correctness` judge against reference outputs, both on the mini model, returning a score plus a comment.
@@ -454,7 +456,7 @@ These are prerequisites the developer doesn't write. Ask Claude for them before 
 - **Docs to read:** How to define an LLM-as-a-judge evaluator (SDK) (`/langsmith/llm-as-judge-sdk`); Evaluation types (`/langsmith/evaluation-types`). Guide §2.3.
 
 ### CIS-4-4 · Run baseline vs changed-prompt experiments and compare
-- **Epic:** 4 Offline evaluation · **Exam section:** Test · **Estimate:** 2h · **Labels:** `epic-4` `test` `core` `prove-it`
+- **Epic:** 4 Offline evaluation · **Exam section:** Test · **Estimate:** 2h · **Labels:** `by-hand` `epic-4` `test` `core` `prove-it`
 - **Depends on:** CIS-4-2, CIS-4-3
 - **Learning goal:** Telling signal from noise: repetitions, a baseline, and per-example inspection.
 - **Description:** `evals/run_experiment.py` calls `evaluate(...)` with `experiment_prefix`, `num_repetitions=3` and `max_concurrency=2`. Run a baseline, change one thing in the system prompt, run again, and compare. Rough cost: $2–5.
@@ -466,7 +468,7 @@ These are prerequisites the developer doesn't write. Ask Claude for them before 
 - **Docs to read:** Experiment configuration (`/langsmith/experiment-configuration`); How to evaluate with repetitions (`/langsmith/repetition`); How to compare experiment results (`/langsmith/compare-experiment-results`). Guide §2.4, Lab 3.
 
 ### CIS-4-5 · Align the correctness judge with 15+ human labels
-- **Epic:** 4 Offline evaluation · **Exam section:** Test · **Estimate:** 2h · **Labels:** `epic-4` `test` `core` `prove-it`
+- **Epic:** 4 Offline evaluation · **Exam section:** Test · **Estimate:** 2h · **Labels:** `by-hand` `epic-4` `test` `core` `prove-it`
 - **Depends on:** CIS-4-4
 - **Learning goal:** A judge can be consistently wrong; the alignment score measures agreement with humans.
 - **Description:** Send experiment runs to an annotation queue, label at least 15 yourself, record the alignment score, improve the judge prompt or add few-shot corrections, and measure again.
@@ -478,7 +480,7 @@ These are prerequisites the developer doesn't write. Ask Claude for them before 
 - **Docs to read:** Use annotation queues (`/langsmith/annotation-queues`); Improve LLM-as-judge evaluators using human feedback (`/langsmith/improve-judge-evaluator-feedback`); How to improve your evaluator with few-shot examples (`/langsmith/create-few-shot-evaluators`). Guide §2.6, Lab 4.
 
 ### CIS-4-6 · Run evaluators in pytest with LANGSMITH_TEST_CACHE
-- **Epic:** 4 Offline evaluation · **Exam section:** Test · **Estimate:** 2h · **Labels:** `epic-4` `test` `stretch`
+- **Epic:** 4 Offline evaluation · **Exam section:** Test · **Estimate:** 2h · **Labels:** `by-hand` `epic-4` `test` `stretch`
 - **Depends on:** CIS-4-2
 - **Learning goal:** LangSmith unit tests in CI, and caching to stop paying for identical calls.
 - **Description:** Five representative cases as LangSmith-integrated pytest tests, with caching on.
@@ -489,7 +491,7 @@ These are prerequisites the developer doesn't write. Ask Claude for them before 
 - **Docs to read:** How to run evaluations with pytest (`/langsmith/pytest`). Guide §2.4.
 
 ### CIS-4-7 · Write up Epic 4 with Lab 3–4 answers
-- **Epic:** 4 Offline evaluation · **Exam section:** Test · **Estimate:** 1h · **Labels:** `epic-4` `test` `core`
+- **Epic:** 4 Offline evaluation · **Exam section:** Test · **Estimate:** 1h · **Labels:** `by-hand` `epic-4` `test` `core`
 - **Depends on:** CIS-4-4, CIS-4-5
 - **Learning goal:** Consolidate evaluation facts as exam revision notes.
 - **Description:** Epic 4 section in `docs/notes.md`.
@@ -504,7 +506,7 @@ These are prerequisites the developer doesn't write. Ask Claude for them before 
 ## Epic 5 · Local server and auth
 
 ### CIS-5-1 · Register both graphs in langgraph.json and run langgraph dev
-- **Epic:** 5 Local server and auth · **Exam section:** Deploy · **Estimate:** 2h · **Labels:** `epic-5` `deploy` `core`
+- **Epic:** 5 Local server and auth · **Exam section:** Deploy · **Estimate:** 2h · **Labels:** `by-hand` `epic-5` `deploy` `core`
 - **Depends on:** CIS-3-5
 - **Learning goal:** What a graph is to the Agent Server, and that the server, not your code, provides the checkpointer and store.
 - **Description:** `langgraph.json` registers `support_agent` and `dispute_investigator` with `dependencies` and `env`. Graph modules export compiled graphs without their own checkpointer. Inspect thread state and resume a Refund interrupt in Studio.
@@ -515,7 +517,7 @@ These are prerequisites the developer doesn't write. Ask Claude for them before 
 - **Docs to read:** Run a local server (`/oss/python/langgraph/local-server`); Application structure (`/langsmith/application-structure`); Studio (`/oss/python/langgraph/studio`); Agent Server (`/langsmith/agent-server-overview`). Guide §3.1–3.2.
 
 ### CIS-5-2 · Create retail and premium assistants and drive runs with the SDK
-- **Epic:** 5 Local server and auth · **Exam section:** Deploy · **Estimate:** 2h · **Labels:** `epic-5` `deploy` `core`
+- **Epic:** 5 Local server and auth · **Exam section:** Deploy · **Estimate:** 2h · **Labels:** `by-hand` `epic-5` `deploy` `core`
 - **Depends on:** CIS-5-1
 - **Learning goal:** An assistant is a graph plus configuration; runs are stateless or stateful; a graph can be called by graph ID or by assistant ID.
 - **Description:** `scripts/sdk_demo.py` creates `retail` and `premium` assistants that differ in persona prompt and a `refund_cap` ceiling. The effective cap is the lower of the Tier cap and the assistant cap. The script then runs once statelessly, once on a new thread, once by graph ID and once by assistant ID.
@@ -528,7 +530,7 @@ These are prerequisites the developer doesn't write. Ask Claude for them before 
 - **Docs to read:** Assistants (`/langsmith/assistants`); Use threads (`/langsmith/use-threads`); Runs (`/langsmith/runs`); Stateless runs (`/langsmith/stateless-runs`). Guide §3.2.
 
 ### CIS-5-3 · Add custom auth and prove Customer isolation
-- **Epic:** 5 Local server and auth · **Exam section:** Deploy · **Estimate:** 3h · **Labels:** `epic-5` `deploy` `core` `prove-it`
+- **Epic:** 5 Local server and auth · **Exam section:** Deploy · **Estimate:** 3h · **Labels:** `by-hand` `epic-5` `deploy` `core` `prove-it`
 - **Depends on:** CIS-5-2
 - **Learning goal:** Authentication answers who is calling; authorization answers what they may see. The store is shared until you scope it.
 - **Description:** `auth.py`: `@auth.authenticate` maps fake bearer tokens to an identity (Customer ID), Tier and role. `@auth.on.threads.create` stamps `owner`, resource handlers filter reads, and `@auth.on.store` prefixes namespaces with the identity. `resolve_customer` now prefers `langgraph_auth_user` (ADR 0002). Register the auth path in `langgraph.json`.
@@ -542,7 +544,7 @@ These are prerequisites the developer doesn't write. Ask Claude for them before 
 - **Docs to read:** Authentication & access control (`/langsmith/auth`); Add custom authentication (`/langsmith/custom-auth`); Make conversations private (`/langsmith/resource-auth`); Isolate store data per user (`/langsmith/store-auth`). Guide §3.6, ADR 0002.
 
 ### CIS-5-4 · Approve Refunds from a cli.py review command
-- **Epic:** 5 Local server and auth · **Exam section:** Deploy · **Estimate:** 2h · **Labels:** `epic-5` `deploy` `stretch`
+- **Epic:** 5 Local server and auth · **Exam section:** Deploy · **Estimate:** 2h · **Labels:** `by-hand` `epic-5` `deploy` `stretch`
 - **Depends on:** CIS-5-3, CIS-2-2
 - **Learning goal:** An interrupted thread can be resumed from any client; the Reviewer is a different actor with a different role.
 - **Description:** `cli.py review` uses a Reviewer token to list interrupted threads, show each proposed Refund, and resume with approve, edit or reject.
@@ -552,7 +554,7 @@ These are prerequisites the developer doesn't write. Ask Claude for them before 
 - **Docs to read:** Human-in-the-loop using server API (`/langsmith/add-human-in-the-loop`); Use threads.
 
 ### CIS-5-5 · Serve a web chat page from a custom route
-- **Epic:** 5 Local server and auth · **Exam section:** Deploy · **Estimate:** 3h · **Labels:** `epic-5` `deploy` `stretch`
+- **Epic:** 5 Local server and auth · **Exam section:** Deploy · **Estimate:** 3h · **Labels:** `owner-tbd` `epic-5` `deploy` `stretch`
 - **Depends on:** CIS-5-3
 - **Learning goal:** Extending the Agent Server with your own HTTP app while keeping every secret server-side.
 - **Description:** A small Starlette or FastAPI app (`http.app` in `langgraph.json`) serves one plain HTML and JavaScript page. The page chats through the Agent Server API with a Customer's bearer token, streams replies, and shows "awaiting approval" and Confirmation prompts.
@@ -563,7 +565,7 @@ These are prerequisites the developer doesn't write. Ask Claude for them before 
 - **Docs to read:** How to add custom routes (`/langsmith/custom-routes`); Use threads.
 
 ### CIS-5-6 · Call the investigator through RemoteGraph
-- **Epic:** 5 Local server and auth · **Exam section:** Deploy · **Estimate:** 2h · **Labels:** `epic-5` `deploy` `stretch`
+- **Epic:** 5 Local server and auth · **Exam section:** Deploy · **Estimate:** 2h · **Labels:** `owner-tbd` `epic-5` `deploy` `stretch`
 - **Depends on:** CIS-5-1
 - **Learning goal:** The trade-off ADR 0001 rejected, made visible.
 - **Description:** An env var switches `open_dispute` between in-process and `RemoteGraph`.
@@ -574,7 +576,7 @@ These are prerequisites the developer doesn't write. Ask Claude for them before 
 - **Docs to read:** How to interact with a deployment using RemoteGraph (`/langsmith/use-remote-graph`).
 
 ### CIS-5-7 · Write up Epic 5
-- **Epic:** 5 Local server and auth · **Exam section:** Deploy · **Estimate:** 1h · **Labels:** `epic-5` `deploy` `core`
+- **Epic:** 5 Local server and auth · **Exam section:** Deploy · **Estimate:** 1h · **Labels:** `by-hand` `epic-5` `deploy` `core`
 - **Depends on:** CIS-5-3
 - **Learning goal:** Map the six Deploy nouns onto real Ciste objects.
 - **Description:** Epic 5 section in `docs/notes.md`.
@@ -589,7 +591,7 @@ These are prerequisites the developer doesn't write. Ask Claude for them before 
 ## Epic 6 · Cloud deployment
 
 ### CIS-6-1 · Deploy to LangSmith Cloud with the model key as a secret
-- **Epic:** 6 Cloud deployment · **Exam section:** Deploy · **Estimate:** 2h · **Labels:** `epic-6` `deploy` `stretch` `plus`
+- **Epic:** 6 Cloud deployment · **Exam section:** Deploy · **Estimate:** 2h · **Labels:** `by-hand` `epic-6` `deploy` `stretch` `plus`
 - **Depends on:** CIS-5-3
 - **Learning goal:** Control plane vs data plane, secrets vs plain env vars, and the Development deployment type.
 - **Description:** Create a Development deployment from the GitHub repo, entering `OPENAI_API_KEY` as a secret.
@@ -600,7 +602,7 @@ These are prerequisites the developer doesn't write. Ask Claude for them before 
 - **Docs to read:** Deploy to Cloud (`/langsmith/deploy-to-cloud-overview`); Create a deployment (`/langsmith/deploy-to-cloud`); Cloud Agent Server environment variables (`/langsmith/env-var-cloud`); Cloud platform features (`/langsmith/cloud-platform-features`). Guide §3.1, §3.5.
 
 ### CIS-6-2 · Re-create assistants and prove isolation in the cloud
-- **Epic:** 6 Cloud deployment · **Exam section:** Deploy · **Estimate:** 1h · **Labels:** `epic-6` `deploy` `stretch` `plus` `prove-it`
+- **Epic:** 6 Cloud deployment · **Exam section:** Deploy · **Estimate:** 1h · **Labels:** `by-hand` `epic-6` `deploy` `stretch` `plus` `prove-it`
 - **Depends on:** CIS-6-1
 - **Learning goal:** The same SDK and auth behaviour, local and cloud.
 - **Description:** Point `sdk_demo.py` and the auth checks at the cloud URL.
@@ -610,7 +612,7 @@ These are prerequisites the developer doesn't write. Ask Claude for them before 
 - **Docs to read:** Assistants; Make conversations private.
 
 ### CIS-6-3 · Rotate the model secret through a new revision
-- **Epic:** 6 Cloud deployment · **Exam section:** Deploy · **Estimate:** 1h · **Labels:** `epic-6` `deploy` `stretch` `plus` `prove-it`
+- **Epic:** 6 Cloud deployment · **Exam section:** Deploy · **Estimate:** 1h · **Labels:** `by-hand` `epic-6` `deploy` `stretch` `plus` `prove-it`
 - **Depends on:** CIS-6-1
 - **Learning goal:** Code changes and secret changes both take effect only through a new revision.
 - **Description:** Create a new OpenAI key, update it through **+ New Revision**, and revoke the old one.
@@ -620,7 +622,7 @@ These are prerequisites the developer doesn't write. Ask Claude for them before 
 - **Docs to read:** Revisions (`/langsmith/deployment-revisions`). Guide §3.5.
 
 ### CIS-6-4 · Write up storage durability, regions and Epic 6
-- **Epic:** 6 Cloud deployment · **Exam section:** Deploy · **Estimate:** 1h · **Labels:** `epic-6` `deploy` `core`
+- **Epic:** 6 Cloud deployment · **Exam section:** Deploy · **Estimate:** 1h · **Labels:** `by-hand` `epic-6` `deploy` `core`
 - **Depends on:** CIS-5-7
 - **Learning goal:** What survives what: Postgres is durable, Redis isn't, and data stays in its region.
 - **Description:** Epic 6 section in `docs/notes.md`. Without Plus, answer from the docs and guide instead of a live deployment.
@@ -635,7 +637,7 @@ These are prerequisites the developer doesn't write. Ask Claude for them before 
 ## Epic 7 · Monitoring
 
 ### CIS-7-1 · Put thread metadata on every run and verify thread cost
-- **Epic:** 7 Monitoring · **Exam section:** Monitor · **Estimate:** 2h · **Labels:** `epic-7` `monitor` `core` `prove-it`
+- **Epic:** 7 Monitoring · **Exam section:** Monitor · **Estimate:** 2h · **Labels:** `by-hand` `epic-7` `monitor` `core` `prove-it`
 - **Depends on:** CIS-3-5
 - **Learning goal:** Child runs without thread metadata drop out of thread cost totals, the classic "thread cost looks too low" problem.
 - **Description:** Make sure every run, including nested investigator, subagent and summarization runs, carries `thread_id`, plus `tier` and `environment` metadata.
@@ -647,7 +649,7 @@ These are prerequisites the developer doesn't write. Ask Claude for them before 
 - **Docs to read:** Configure threads (`/langsmith/threads`); Add metadata and tags to traces (`/langsmith/add-metadata-tags`); Cost tracking; Trace LangGraph agents. Guide §4.3–4.4, Lab 6.
 
 ### CIS-7-2 · Log thumbs-up/down feedback from the CLI
-- **Epic:** 7 Monitoring · **Exam section:** Monitor · **Estimate:** 1h · **Labels:** `epic-7` `monitor` `core`
+- **Epic:** 7 Monitoring · **Exam section:** Monitor · **Estimate:** 1h · **Labels:** `by-hand` `epic-7` `monitor` `core`
 - **Depends on:** CIS-1-4
 - **Learning goal:** End-user sentiment becomes feedback attached to a run.
 - **Description:** `/good` and `/bad` in the CLI attach a `user_score` feedback to the last run.
@@ -658,7 +660,7 @@ These are prerequisites the developer doesn't write. Ask Claude for them before 
 - **Docs to read:** Log user feedback using the SDK (`/langsmith/attach-user-feedback`). Guide §4.4.
 
 ### CIS-7-3 · Generate about 50 simulated conversations
-- **Epic:** 7 Monitoring · **Exam section:** Monitor · **Estimate:** 2h · **Labels:** `epic-7` `monitor` `core`
+- **Epic:** 7 Monitoring · **Exam section:** Monitor · **Estimate:** 2h · **Labels:** `owner-tbd` `epic-7` `monitor` `core`
 - **Depends on:** CIS-7-1, CIS-7-2
 - **Learning goal:** Monitoring features need realistic traffic, including bad actors and unhappy Customers.
 - **Description:** `scripts/simulate_traffic.py`: the mini model plays Customer personas (routine, angry, injection attempt, wants a human, Dispute) for 3–6 turns. It leaves persona-driven thumbs feedback and makes automatic Reviewer decisions. Rough cost: $1–3.
@@ -669,7 +671,7 @@ These are prerequisites the developer doesn't write. Ask Claude for them before 
 - **Docs to read:** Use threads (if run against the server); Log user feedback using the SDK. Guide Lab 7 setup.
 
 ### CIS-7-4 · Add online groundedness and thread-level satisfaction evaluators
-- **Epic:** 7 Monitoring · **Exam section:** Monitor, Test · **Estimate:** 2h · **Labels:** `epic-7` `monitor` `test` `core`
+- **Epic:** 7 Monitoring · **Exam section:** Monitor, Test · **Estimate:** 2h · **Labels:** `by-hand` `epic-7` `monitor` `test` `core`
 - **Depends on:** CIS-7-3
 - **Learning goal:** Online evaluators are reference-free, sampled and filtered; multi-turn evaluators run once per idle thread.
 - **Description:** On the tracing project, add an LLM-as-judge groundedness evaluator (mini model, sampling 0.3, filtered by run type) and a multi-turn satisfaction evaluator.
@@ -680,7 +682,7 @@ These are prerequisites the developer doesn't write. Ask Claude for them before 
 - **Docs to read:** Set up LLM-as-a-judge online evaluators (`/langsmith/online-evaluations-llm-as-judge`); Set up multi-turn online evaluators (`/langsmith/online-evaluations-multi-turn`). Guide §2.7, §4.5, Lab 7.
 
 ### CIS-7-5 · Route thumbs-down threads to an annotation queue
-- **Epic:** 7 Monitoring · **Exam section:** Monitor · **Estimate:** 1h · **Labels:** `epic-7` `monitor` `core`
+- **Epic:** 7 Monitoring · **Exam section:** Monitor · **Estimate:** 1h · **Labels:** `by-hand` `epic-7` `monitor` `core`
 - **Depends on:** CIS-7-2
 - **Learning goal:** Automation rules: item type, filter, sampling rate, action.
 - **Description:** A thread rule filtered on negative feedback, with the action "send to annotation queue".
@@ -690,7 +692,7 @@ These are prerequisites the developer doesn't write. Ask Claude for them before 
 - **Docs to read:** Set up automation rules (`/langsmith/rules`); Use annotation queues. Guide §4.6.
 
 ### CIS-7-6 · Configure alerts and inspect a webhook payload
-- **Epic:** 7 Monitoring · **Exam section:** Monitor · **Estimate:** 2h · **Labels:** `epic-7` `monitor` `core` `prove-it`
+- **Epic:** 7 Monitoring · **Exam section:** Monitor · **Estimate:** 2h · **Labels:** `by-hand` `epic-7` `monitor` `core` `prove-it`
 - **Depends on:** CIS-7-4
 - **Learning goal:** Alerts need a metric, aggregation, threshold and window; quality alerts need a feedback key first.
 - **Description:** Set up three alerts: error rate (percentage, ≥ 5, 5 minutes, LLM runs only), cost, and feedback score on the satisfaction key. Route one to a webhook (a request-bin URL is fine) and trigger it with `CISTE_FLAKY_DB`.
@@ -701,7 +703,7 @@ These are prerequisites the developer doesn't write. Ask Claude for them before 
 - **Docs to read:** Alerts in LangSmith (`/langsmith/alerts`); Monitor projects with dashboards (`/langsmith/dashboards`). Guide §4.7, Lab 8.
 
 ### CIS-7-7 · Run an Insights report over the simulated traffic
-- **Epic:** 7 Monitoring · **Exam section:** Monitor · **Estimate:** 1h · **Labels:** `epic-7` `monitor` `stretch` `plus`
+- **Epic:** 7 Monitoring · **Exam section:** Monitor · **Estimate:** 1h · **Labels:** `by-hand` `epic-7` `monitor` `stretch` `plus`
 - **Depends on:** CIS-7-3
 - **Learning goal:** Insights discovers unknown patterns; evaluators test known ones.
 - **Description:** An Insights report over the simulated threads, with a `user_satisfied` boolean attribute.
@@ -711,7 +713,7 @@ These are prerequisites the developer doesn't write. Ask Claude for them before 
 - **Docs to read:** Discover errors and usage patterns with Insights (`/langsmith/insights`). Guide §4.5.
 
 ### CIS-7-8 · Log feedback from the web page through POST /feedback
-- **Epic:** 7 Monitoring · **Exam section:** Monitor · **Estimate:** 1h · **Labels:** `epic-7` `monitor` `stretch`
+- **Epic:** 7 Monitoring · **Exam section:** Monitor · **Estimate:** 1h · **Labels:** `owner-tbd` `epic-7` `monitor` `stretch`
 - **Depends on:** CIS-5-5, CIS-7-2
 - **Learning goal:** Collecting feedback in a browser without exposing an API key.
 - **Description:** Thumbs buttons on the web page post to a server-side `/feedback` route that calls LangSmith.
@@ -721,7 +723,7 @@ These are prerequisites the developer doesn't write. Ask Claude for them before 
 - **Docs to read:** Log user feedback using the SDK; How to add custom routes.
 
 ### CIS-7-9 · Scale simulated traffic to 200+ conversations
-- **Epic:** 7 Monitoring · **Exam section:** Monitor · **Estimate:** 1h · **Labels:** `epic-7` `monitor` `stretch`
+- **Epic:** 7 Monitoring · **Exam section:** Monitor · **Estimate:** 1h · **Labels:** `owner-tbd` `epic-7` `monitor` `stretch`
 - **Depends on:** CIS-7-3
 - **Learning goal:** How metrics, Insights and alerts behave at volume.
 - **Description:** Run the simulator for 200+ conversations. Rough cost: $5–10; check the remaining budget first.
@@ -731,7 +733,7 @@ These are prerequisites the developer doesn't write. Ask Claude for them before 
 - **Docs to read:** Monitor projects with dashboards.
 
 ### CIS-7-10 · Write up Epic 7 with Lab 6–8 answers
-- **Epic:** 7 Monitoring · **Exam section:** Monitor · **Estimate:** 1h · **Labels:** `epic-7` `monitor` `core`
+- **Epic:** 7 Monitoring · **Exam section:** Monitor · **Estimate:** 1h · **Labels:** `by-hand` `epic-7` `monitor` `core`
 - **Depends on:** CIS-7-1 … CIS-7-6
 - **Learning goal:** Consolidate Monitor facts as exam revision notes.
 - **Description:** Epic 7 section in `docs/notes.md`.
@@ -746,7 +748,7 @@ These are prerequisites the developer doesn't write. Ask Claude for them before 
 ## Epic 8 · Close the loop
 
 ### CIS-8-1 · Turn a production failure into dataset examples and an evaluator
-- **Epic:** 8 Close the loop · **Exam section:** Test, Monitor · **Estimate:** 2h · **Labels:** `epic-8` `test` `monitor` `core`
+- **Epic:** 8 Close the loop · **Exam section:** Test, Monitor · **Estimate:** 2h · **Labels:** `by-hand` `epic-8` `test` `monitor` `core`
 - **Depends on:** CIS-7-5, CIS-4-4
 - **Learning goal:** Failing production traces become regression tests.
 - **Description:** Take the failure mode from Insights (with Plus) or from the annotation queue and low online scores (without). Add the affected threads to the dataset and add or adjust an evaluator that catches it.
@@ -756,7 +758,7 @@ These are prerequisites the developer doesn't write. Ask Claude for them before 
 - **Docs to read:** Manage datasets; Use annotation queues. Guide §2.5, §4.7 playbook.
 
 ### CIS-8-2 · Fix the failure and confirm it offline and online
-- **Epic:** 8 Close the loop · **Exam section:** Build, Test, Deploy, Monitor · **Estimate:** 2h · **Labels:** `epic-8` `build` `test` `deploy` `monitor` `core` `prove-it`
+- **Epic:** 8 Close the loop · **Exam section:** Build, Test, Deploy, Monitor · **Estimate:** 2h · **Labels:** `by-hand` `epic-8` `build` `test` `deploy` `monitor` `core` `prove-it`
 - **Depends on:** CIS-8-1
 - **Learning goal:** The full lifecycle loop: Build → Test → Deploy → Monitor → Build.
 - **Description:** Fix the failure in the prompt or middleware, rerun the experiment against the baseline, redeploy (a new revision with Plus, a `langgraph dev` restart without), and run fresh simulated traffic. Rough cost: $2–5.
@@ -767,7 +769,7 @@ These are prerequisites the developer doesn't write. Ask Claude for them before 
 - **Docs to read:** How to compare experiment results; Revisions.
 
 ### CIS-8-3 · Write the README and the Epic 8 write-up
-- **Epic:** 8 Close the loop · **Exam section:** Build, Test, Deploy, Monitor · **Estimate:** 2h · **Labels:** `epic-8` `build` `test` `deploy` `monitor` `core`
+- **Epic:** 8 Close the loop · **Exam section:** Build, Test, Deploy, Monitor · **Estimate:** 2h · **Labels:** `by-hand` `epic-8` `build` `test` `deploy` `monitor` `core`
 - **Depends on:** CIS-8-2
 - **Learning goal:** Explain the project as a portfolio piece and as a revision map.
 - **Description:** `README.md` and the final `docs/notes.md` section.
