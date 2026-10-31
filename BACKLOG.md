@@ -114,7 +114,7 @@ These are prerequisites the developer doesn't write. Ask Claude for them before 
   - [ ] The repo's history still contains no secrets and no PDF
   - [ ] `uv run python -c "import ciste"` succeeds
 - **Hints:** `uv init`, `uv add`, `uv run`. The `[inmem]` extra is what `langgraph dev` needs.
-- **Docs to read:** Run a local server (`/oss/python/langgraph/local-server`) for the CLI install line. Guide §0.
+- **Docs to read:** [Run a local server](https://docs.langchain.com/oss/python/langgraph/local-server) for the CLI install line. Guide §0.
 
 ### CIS-0-2 · Trace a first OpenAI call in LangSmith
 - **Epic:** 0 Project setup · **Exam section:** Monitor · **Estimate:** 1h · **Labels:** `by-hand` `epic-0` `monitor` `core` `prove-it`
@@ -126,7 +126,7 @@ These are prerequisites the developer doesn't write. Ask Claude for them before 
   - [ ] `docs/notes.md` records the chosen model IDs and their prices per million tokens
   - [ ] Notes say whether the org is US or EU and whether `LANGSMITH_ENDPOINT` was needed
 - **Hints:** `init_chat_model("openai:<model>")`; load `.env` with `uv run --env-file .env` or `python-dotenv`. Verify current model IDs and prices on OpenAI's site.
-- **Docs to read:** Tracing quickstart (`/langsmith/observability-quickstart`); Models (`/oss/python/langchain/models`); OpenAI integrations (`/oss/python/integrations/providers/openai`); Cost tracking (`/langsmith/cost-tracking`). Guide §4.1, §4.4.
+- **Docs to read:** [Tracing quickstart](https://docs.langchain.com/langsmith/observability-quickstart); [Models](https://docs.langchain.com/oss/python/langchain/models); [OpenAI integrations](https://docs.langchain.com/oss/python/integrations/providers/openai); [Cost tracking](https://docs.langchain.com/langsmith/cost-tracking). Guide §4.1, §4.4.
 
 ### CIS-0-3 · Create the SQLite schema and deterministic seed script
 - **Epic:** 0 Project setup · **Exam section:** Build · **Estimate:** 2h · **Labels:** `owner-tbd` `epic-0` `build` `core`
@@ -170,7 +170,7 @@ These are prerequisites the developer doesn't write. Ask Claude for them before 
   - [ ] Every tool gets the Customer through `resolve_customer`
   - [ ] pytest covers the query helpers
 - **Hints:** `from langchain.tools import tool, ToolRuntime`; `runtime.context`.
-- **Docs to read:** Tools (`/oss/python/langchain/tools`); Runtime (`/oss/python/langchain/runtime`); Context overview (`/oss/python/concepts/context`). Guide §1.5 "Runtime context vs state".
+- **Docs to read:** [Tools](https://docs.langchain.com/oss/python/langchain/tools); [Runtime](https://docs.langchain.com/oss/python/langchain/runtime); [Context overview](https://docs.langchain.com/oss/python/concepts/context). Guide §1.5 "Runtime context vs state".
 
 ### CIS-1-2 · Add keyword search_terms over the Fees and Terms
 - **Epic:** 1 Support agent core · **Exam section:** Build · **Estimate:** 1h · **Labels:** `owner-tbd` `epic-1` `build` `core`
@@ -182,7 +182,7 @@ These are prerequisites the developer doesn't write. Ask Claude for them before 
   - [ ] Every result carries its section ID and text
   - [ ] A query with no match returns an explicit "no matching section" message
   - [ ] pytest covers three queries
-- **Docs to read:** Tools (`/oss/python/langchain/tools`). Guide §1.1.
+- **Docs to read:** [Tools](https://docs.langchain.com/oss/python/langchain/tools). Guide §1.1.
 
 ### CIS-1-3 · Implement issue_refund and escalate_to_human; stub open_dispute
 - **Epic:** 1 Support agent core · **Exam section:** Build · **Estimate:** 2h · **Labels:** `by-hand` `epic-1` `build` `core`
@@ -196,7 +196,7 @@ These are prerequisites the developer doesn't write. Ask Claude for them before 
   - [ ] `open_dispute` returns a reference like `D-0042`
   - [ ] pytest covers the Refund rules
 - **Hints:** `@tool(return_direct=True)`; a tool can return `Command(update={...})` including its `ToolMessage`; a custom state field needs a state schema.
-- **Docs to read:** Tools; Agents (`/oss/python/langchain/agents`); Short-term memory (`/oss/python/langchain/short-term-memory`). Guide §1.1.
+- **Docs to read:** [Tools](https://docs.langchain.com/oss/python/langchain/tools); [Agents](https://docs.langchain.com/oss/python/langchain/agents); [Short-term memory](https://docs.langchain.com/oss/python/langchain/short-term-memory). Guide §1.1.
 
 ### CIS-1-4 · Assemble the support agent and CLI chat loop
 - **Epic:** 1 Support agent core · **Exam section:** Build · **Estimate:** 2h · **Labels:** `by-hand` `epic-1` `build` `core`
@@ -209,7 +209,7 @@ These are prerequisites the developer doesn't write. Ask Claude for them before 
   - [ ] After an Escalation, the CLI prints a handoff message and accepts no more input on that thread
   - [ ] An unknown Customer ID fails fast with no model call
 - **Hints:** `create_agent(model=, tools=, system_prompt=, checkpointer=, context_schema=)`; `config={"configurable": {"thread_id": ...}}`.
-- **Docs to read:** Agents; Short-term memory; Persistence (`/oss/python/langgraph/persistence`). Guide §1.1.
+- **Docs to read:** [Agents](https://docs.langchain.com/oss/python/langchain/agents); [Short-term memory](https://docs.langchain.com/oss/python/langchain/short-term-memory); [Persistence](https://docs.langchain.com/oss/python/langgraph/persistence). Guide §1.1.
 
 ### CIS-1-5 · Add freeze_card with a raw interrupt() Confirmation
 - **Epic:** 1 Support agent core · **Exam section:** Build · **Estimate:** 2h · **Labels:** `by-hand` `epic-1` `build` `stretch`
@@ -221,7 +221,7 @@ These are prerequisites the developer doesn't write. Ask Claude for them before 
   - [ ] "no" leaves the Card unchanged; "yes" updates its status
   - [ ] The trace shows the interrupt and the resumed run on the same thread
 - **Hints:** `from langgraph.types import interrupt, Command`; `Command(resume=...)`.
-- **Docs to read:** Interrupts (`/oss/python/langgraph/interrupts`); Human-in-the-loop overview (`/oss/python/concepts/human-in-the-loop`).
+- **Docs to read:** [Interrupts](https://docs.langchain.com/oss/python/langgraph/interrupts); [Human-in-the-loop overview](https://docs.langchain.com/oss/python/concepts/human-in-the-loop).
 
 ### CIS-1-6 · Prove the tool loop in LangSmith and write up Epic 1
 - **Epic:** 1 Support agent core · **Exam section:** Build, Monitor · **Estimate:** 1h · **Labels:** `by-hand` `epic-1` `build` `monitor` `core` `prove-it`
@@ -232,7 +232,7 @@ These are prerequisites the developer doesn't write. Ask Claude for them before 
   - [ ] One Conversation looks up the Account, lists last week's transactions, and explains a Fee citing an `FT-` section ID
   - [ ] The trace tree shows each tool call as a child run (link or screenshot in notes)
   - [ ] Notes cover the `create_agent` parameters used, context vs state, and one wrong assumption
-- **Docs to read:** Trace LangGraph agents (`/langsmith/trace-with-langgraph`). Guide §1.1, §4.2.
+- **Docs to read:** [Trace LangGraph agents](https://docs.langchain.com/langsmith/trace-with-langgraph). Guide §1.1, §4.2.
 
 ---
 
@@ -247,7 +247,7 @@ These are prerequisites the developer doesn't write. Ask Claude for them before 
   - [ ] `docs/notes.md` has a table of observed order for both lists and all three hook types
   - [ ] Notes say where middleware spans appear in the LangSmith trace tree
   - [ ] Notes predict where a guard must sit relative to `HumanInTheLoopMiddleware` for its `after_model` to run first (tested in CIS-2-6)
-- **Docs to read:** Middleware overview (`/oss/python/langchain/middleware/overview`); Custom middleware (`/oss/python/langchain/middleware/custom`). Guide §1.2, Lab 1.
+- **Docs to read:** [Middleware overview](https://docs.langchain.com/oss/python/langchain/middleware/overview); [Custom middleware](https://docs.langchain.com/oss/python/langchain/middleware/custom). Guide §1.2, Lab 1.
 
 ### CIS-2-2 · Pause Refunds for Reviewer Approval with HITL
 - **Epic:** 2 Middleware · **Exam section:** Build · **Estimate:** 2h · **Labels:** `by-hand` `epic-2` `build` `core`
@@ -260,7 +260,7 @@ These are prerequisites the developer doesn't write. Ask Claude for them before 
   - [ ] No other tool interrupts
   - [ ] Notes record what happens without a checkpointer (Lab 1 step 4)
 - **Hints:** `interrupt_on={"issue_refund": {"allowed_decisions": ["approve", "edit", "reject"]}}`; resume with `Command(resume={"decisions": [{"type": "approve"}]})`; read pending interrupts from `result.interrupts` (with `version="v2"`).
-- **Docs to read:** Human-in-the-loop (`/oss/python/langchain/human-in-the-loop`); Prebuilt middleware (`/oss/python/langchain/middleware/built-in`). Guide §1.2.
+- **Docs to read:** [Human-in-the-loop](https://docs.langchain.com/oss/python/langchain/human-in-the-loop); [Prebuilt middleware](https://docs.langchain.com/oss/python/langchain/middleware/built-in). Guide §1.2.
 
 ### CIS-2-3 · Inject Tier with @dynamic_prompt and cap Refunds with @wrap_tool_call
 - **Epic:** 2 Middleware · **Exam section:** Build · **Estimate:** 2h · **Labels:** `by-hand` `epic-2` `build` `core`
@@ -274,7 +274,7 @@ These are prerequisites the developer doesn't write. Ask Claude for them before 
   - [ ] Cap values live in one place, keyed by Tier
   - [ ] A unit test proves the guard never calls the handler when over the cap
 - **Hints:** `@wrap_tool_call def guard(request, handler)`; `request.tool_call["args"]`. Not verified: whether `request` exposes runtime/context. Spike first; fall back to `resolve_customer`.
-- **Docs to read:** Custom middleware; Runtime; Context engineering in agents (`/oss/python/langchain/context-engineering`). Guide §1.2, §1.5.
+- **Docs to read:** [Custom middleware](https://docs.langchain.com/oss/python/langchain/middleware/custom); [Runtime](https://docs.langchain.com/oss/python/langchain/runtime); [Context engineering in agents](https://docs.langchain.com/oss/python/langchain/context-engineering). Guide §1.2, §1.5.
 
 ### CIS-2-4 · Catch the PII leak in a trace, then mask at source
 - **Epic:** 2 Middleware · **Exam section:** Build, Monitor · **Estimate:** 2h · **Labels:** `by-hand` `epic-2` `build` `monitor` `core` `prove-it`
@@ -288,7 +288,7 @@ These are prerequisites the developer doesn't write. Ask Claude for them before 
   - [ ] The agent can still tell the Customer the last four digits
   - [ ] pytest covers the masking helper for IBANs and 16-digit card numbers
 - **Hints:** `PIIMiddleware("iban", detector=r"...", strategy="mask", apply_to_output=True, apply_to_tool_results=True)`. `apply_to_output` and `apply_to_tool_results` default to `False`.
-- **Docs to read:** Prebuilt middleware; Prevent logging of sensitive data in traces (`/langsmith/mask-inputs-outputs`). Guide §1.2.
+- **Docs to read:** [Prebuilt middleware](https://docs.langchain.com/oss/python/langchain/middleware/built-in); [Prevent logging of sensitive data in traces](https://docs.langchain.com/langsmith/mask-inputs-outputs). Guide §1.2.
 
 ### CIS-2-5 · Add tool retry, model call limit and summarization
 - **Epic:** 2 Middleware · **Exam section:** Build · **Estimate:** 2h · **Labels:** `by-hand` `epic-2` `build` `core`
@@ -301,7 +301,7 @@ These are prerequisites the developer doesn't write. Ask Claude for them before 
   - [ ] After enough turns, a summary written by the mini model replaces older history (visible in the trace)
   - [ ] Notes justify where retry sits in the middleware list
 - **Hints:** `ToolRetryMiddleware(tools=[...], retry_on=(sqlite3.OperationalError,))`; `SummarizationMiddleware(model=..., trigger=("messages", 10))`.
-- **Docs to read:** Prebuilt middleware. Guide §1.2, Lab 1 step 5.
+- **Docs to read:** [Prebuilt middleware](https://docs.langchain.com/oss/python/langchain/middleware/built-in). Guide §1.2, Lab 1 step 5.
 
 ### CIS-2-6 · Stop over-cap Refunds before they reach a Reviewer
 - **Epic:** 2 Middleware · **Exam section:** Build · **Estimate:** 2h · **Labels:** `by-hand` `epic-2` `build` `stretch`
@@ -313,7 +313,7 @@ These are prerequisites the developer doesn't write. Ask Claude for them before 
   - [ ] Swapping the guard's position makes the interrupt reappear
   - [ ] In-cap Refunds still interrupt
 - **Hints:** Not verified: how to rewrite or remove a tool call on the last `AIMessage`. Spike first. Docs only show returning new messages with `jump_to`.
-- **Docs to read:** Custom middleware; Human-in-the-loop. Guide §1.2.
+- **Docs to read:** [Custom middleware](https://docs.langchain.com/oss/python/langchain/middleware/custom); [Human-in-the-loop](https://docs.langchain.com/oss/python/langchain/human-in-the-loop). Guide §1.2.
 
 ### CIS-2-7 · Write up Epic 2 with Lab 1 answers
 - **Epic:** 2 Middleware · **Exam section:** Build · **Estimate:** 1h · **Labels:** `by-hand` `epic-2` `build` `core`
@@ -341,7 +341,7 @@ These are prerequisites the developer doesn't write. Ask Claude for them before 
   - [ ] Notes show where `AGENTS.md` content appears in the model input in the trace
   - [ ] `AGENTS.md` is short (about 40 lines max) and contains no secrets
   - [ ] Notes list the built-in tools the deep agent has that the support agent doesn't
-- **Docs to read:** Deep Agents overview (`/oss/python/deepagents/overview`); Customize Deep Agents (`/oss/python/deepagents/customization`); Memory (`/oss/python/deepagents/memory`); Backends (`/oss/python/deepagents/backends`); Structured output (`/oss/python/langchain/structured-output`). Guide §1.3, §1.4, §1.6.
+- **Docs to read:** [Deep Agents overview](https://docs.langchain.com/oss/python/deepagents/overview); [Customize Deep Agents](https://docs.langchain.com/oss/python/deepagents/customization); [Memory](https://docs.langchain.com/oss/python/deepagents/memory); [Backends](https://docs.langchain.com/oss/python/deepagents/backends); [Structured output](https://docs.langchain.com/oss/python/langchain/structured-output). Guide §1.3, §1.4, §1.6.
 
 ### CIS-3-2 · Add the chargeback-rules skill and prove progressive disclosure
 - **Epic:** 3 Dispute Investigator · **Exam section:** Build · **Estimate:** 2h · **Labels:** `by-hand` `epic-3` `build` `core` `prove-it`
@@ -353,7 +353,7 @@ These are prerequisites the developer doesn't write. Ask Claude for them before 
   - [ ] The `references/` file is read only when the case needs reason codes (one trace each way)
   - [ ] Notes record what happens when `skills` points directly at `/skills/chargeback-rules/` (Lab 2 step 3)
   - [ ] Frontmatter meets the spec: name is 1–64 lowercase-hyphen characters, description is at most 1,024 characters
-- **Docs to read:** Skills (`/oss/python/deepagents/skills`). Guide §1.6, Lab 2.
+- **Docs to read:** [Skills](https://docs.langchain.com/oss/python/deepagents/skills). Guide §1.6, Lab 2.
 
 ### CIS-3-3 · Add the transaction-analyst subagent and observe offloading
 - **Epic:** 3 Dispute Investigator · **Exam section:** Build · **Estimate:** 2h · **Labels:** `by-hand` `epic-3` `build` `core` `prove-it`
@@ -366,7 +366,7 @@ These are prerequisites the developer doesn't write. Ask Claude for them before 
   - [ ] The subagent can't see `chargeback-rules` unless you give it a `skills` list (show the trace)
   - [ ] The investigator's own context never contains the raw export
 - **Hints:** If the export is under 20,000 tokens, make rows more verbose; count with `tiktoken`.
-- **Docs to read:** Subagents (`/oss/python/deepagents/subagents`); Context engineering in Deep Agents (`/oss/python/deepagents/context-engineering`). Guide §1.3, §1.5.
+- **Docs to read:** [Subagents](https://docs.langchain.com/oss/python/deepagents/subagents); [Context engineering in Deep Agents](https://docs.langchain.com/oss/python/deepagents/context-engineering). Guide §1.3, §1.5.
 
 ### CIS-3-4 · Remember per-customer notes across threads with /memories/
 - **Epic:** 3 Dispute Investigator · **Exam section:** Build · **Estimate:** 2h · **Labels:** `by-hand` `epic-3` `build` `core`
@@ -378,7 +378,7 @@ These are prerequisites the developer doesn't write. Ask Claude for them before 
   - [ ] Customer C002 can't see C001's note
   - [ ] Without the route, the note does not survive (recorded in notes)
   - [ ] Notes explain `InMemoryStore` locally vs the Postgres-backed store on the Agent Server
-- **Docs to read:** Backends; Memory; Long-term memory (`/oss/python/langchain/long-term-memory`). Guide §1.3, practice Q10.
+- **Docs to read:** [Backends](https://docs.langchain.com/oss/python/deepagents/backends); [Memory](https://docs.langchain.com/oss/python/deepagents/memory); [Long-term memory](https://docs.langchain.com/oss/python/langchain/long-term-memory). Guide §1.3, practice Q10.
 
 ### CIS-3-5 · Wire open_dispute to the investigator in-process
 - **Epic:** 3 Dispute Investigator · **Exam section:** Build · **Estimate:** 2h · **Labels:** `by-hand` `epic-3` `build` `core`
@@ -390,7 +390,7 @@ These are prerequisites the developer doesn't write. Ask Claude for them before 
   - [ ] The Customer's reply contains the Dispute reference and never the recommendation
   - [ ] Investigator runs appear nested under the support agent's trace
   - [ ] The investigator can't read another Customer's transactions
-- **Docs to read:** Runtime; Trace LangGraph agents. Guide §1.1 "Embedding an agent", ADR 0001.
+- **Docs to read:** [Runtime](https://docs.langchain.com/oss/python/langchain/runtime); [Trace LangGraph agents](https://docs.langchain.com/langsmith/trace-with-langgraph). Guide §1.1 "Embedding an agent", ADR 0001.
 
 ### CIS-3-6 · Run an analysis script in a sandbox backend
 - **Epic:** 3 Dispute Investigator · **Exam section:** Build · **Estimate:** 3h · **Labels:** `by-hand` `epic-3` `build` `stretch`
@@ -401,7 +401,7 @@ These are prerequisites the developer doesn't write. Ask Claude for them before 
   - [ ] The script runs inside the sandbox and its result reaches the report
   - [ ] Printing the environment inside the sandbox shows no API keys
   - [ ] The sandbox is stopped in a `finally` block, and its cost is recorded
-- **Docs to read:** Sandboxes (`/oss/python/deepagents/sandboxes`). Guide §1.7.
+- **Docs to read:** [Sandboxes](https://docs.langchain.com/oss/python/deepagents/sandboxes). Guide §1.7.
 
 ### CIS-3-7 · Write up Epic 3 with Lab 2 answers
 - **Epic:** 3 Dispute Investigator · **Exam section:** Build · **Estimate:** 1h · **Labels:** `by-hand` `epic-3` `build` `core`
@@ -430,7 +430,7 @@ These are prerequisites the developer doesn't write. Ask Claude for them before 
   - [ ] The target returns its output dict for every category without hanging on an interrupt
   - [ ] Two more examples added by hand in the UI (Lab 3 step 1)
 - **Hints:** `Client.has_dataset`, `create_dataset`, `create_examples`.
-- **Docs to read:** Manage datasets (`/langsmith/manage-datasets`); How to evaluate agents (`/langsmith/evaluate-llm-application`); Evaluation concepts (`/langsmith/evaluation-concepts`). Guide §2.1, §2.5.
+- **Docs to read:** [Manage datasets](https://docs.langchain.com/langsmith/manage-datasets); [How to evaluate agents](https://docs.langchain.com/langsmith/evaluate-llm-application); [Evaluation concepts](https://docs.langchain.com/langsmith/evaluation-concepts). Guide §2.1, §2.5.
 
 ### CIS-4-2 · Write the code evaluators
 - **Epic:** 4 Offline evaluation · **Exam section:** Test · **Estimate:** 2h · **Labels:** `by-hand` `epic-4` `test` `core`
@@ -441,7 +441,7 @@ These are prerequisites the developer doesn't write. Ask Claude for them before 
   - [ ] Each evaluator has a pytest with one passing and one failing fake output
   - [ ] Evaluators that don't apply to an example's category skip it rather than scoring it
   - [ ] Return values follow the SDK conventions (bool, number or `{"key", "score"}` dict)
-- **Docs to read:** How to define a code evaluator (SDK) (`/langsmith/code-evaluator-sdk`). Guide §2.3.
+- **Docs to read:** [How to define a code evaluator (SDK)](https://docs.langchain.com/langsmith/code-evaluator-sdk). Guide §2.3.
 
 ### CIS-4-3 · Write LLM-as-judge evaluators on the mini model
 - **Epic:** 4 Offline evaluation · **Exam section:** Test · **Estimate:** 2h · **Labels:** `by-hand` `epic-4` `test` `core`
@@ -453,7 +453,7 @@ These are prerequisites the developer doesn't write. Ask Claude for them before 
   - [ ] Each judge returns a score and a reasoning comment
   - [ ] Hand-checked on 3 examples; notes record agreement
   - [ ] Estimated judge cost per experiment recorded
-- **Docs to read:** How to define an LLM-as-a-judge evaluator (SDK) (`/langsmith/llm-as-judge-sdk`); Evaluation types (`/langsmith/evaluation-types`). Guide §2.3.
+- **Docs to read:** [How to define an LLM-as-a-judge evaluator (SDK)](https://docs.langchain.com/langsmith/llm-as-judge-sdk); [Evaluation types](https://docs.langchain.com/langsmith/evaluation-types). Guide §2.3.
 
 ### CIS-4-4 · Run baseline vs changed-prompt experiments and compare
 - **Epic:** 4 Offline evaluation · **Exam section:** Test · **Estimate:** 2h · **Labels:** `by-hand` `epic-4` `test` `core` `prove-it`
@@ -465,7 +465,7 @@ These are prerequisites the developer doesn't write. Ask Claude for them before 
   - [ ] In the comparison view with the baseline set, notes list regressed (red) and improved (green) examples
   - [ ] One sentence: did the mean move by more than the spread between repetitions, so signal or noise?
   - [ ] Actual cost of both runs recorded
-- **Docs to read:** Experiment configuration (`/langsmith/experiment-configuration`); How to evaluate with repetitions (`/langsmith/repetition`); How to compare experiment results (`/langsmith/compare-experiment-results`). Guide §2.4, Lab 3.
+- **Docs to read:** [Experiment configuration](https://docs.langchain.com/langsmith/experiment-configuration); [How to evaluate with repetitions](https://docs.langchain.com/langsmith/repetition); [How to compare experiment results](https://docs.langchain.com/langsmith/compare-experiment-results). Guide §2.4, Lab 3.
 
 ### CIS-4-5 · Align the correctness judge with 15+ human labels
 - **Epic:** 4 Offline evaluation · **Exam section:** Test · **Estimate:** 2h · **Labels:** `by-hand` `epic-4` `test` `core` `prove-it`
@@ -477,7 +477,7 @@ These are prerequisites the developer doesn't write. Ask Claude for them before 
   - [ ] Alignment score before and after recorded in notes
   - [ ] Labelled examples saved to a reference dataset
   - [ ] Notes explain reliability vs accuracy using your own numbers
-- **Docs to read:** Use annotation queues (`/langsmith/annotation-queues`); Improve LLM-as-judge evaluators using human feedback (`/langsmith/improve-judge-evaluator-feedback`); How to improve your evaluator with few-shot examples (`/langsmith/create-few-shot-evaluators`). Guide §2.6, Lab 4.
+- **Docs to read:** [Use annotation queues](https://docs.langchain.com/langsmith/annotation-queues); [Improve LLM-as-judge evaluators using human feedback](https://docs.langchain.com/langsmith/improve-judge-evaluator-feedback); [How to improve your evaluator with few-shot examples](https://docs.langchain.com/langsmith/create-few-shot-evaluators). Guide §2.6, Lab 4.
 
 ### CIS-4-6 · Run evaluators in pytest with LANGSMITH_TEST_CACHE
 - **Epic:** 4 Offline evaluation · **Exam section:** Test · **Estimate:** 2h · **Labels:** `by-hand` `epic-4` `test` `stretch`
@@ -488,7 +488,7 @@ These are prerequisites the developer doesn't write. Ask Claude for them before 
   - [ ] Tests appear in LangSmith as an experiment
   - [ ] The second run is served from cache (no new OpenAI usage)
   - [ ] Optional: a GitHub Actions workflow runs them, with the key as a repository secret
-- **Docs to read:** How to run evaluations with pytest (`/langsmith/pytest`). Guide §2.4.
+- **Docs to read:** [How to run evaluations with pytest](https://docs.langchain.com/langsmith/pytest). Guide §2.4.
 
 ### CIS-4-7 · Write up Epic 4 with Lab 3–4 answers
 - **Epic:** 4 Offline evaluation · **Exam section:** Test · **Estimate:** 1h · **Labels:** `by-hand` `epic-4` `test` `core`
@@ -514,7 +514,7 @@ These are prerequisites the developer doesn't write. Ask Claude for them before 
   - [ ] `uv run langgraph dev` starts, and both graphs appear in Studio
   - [ ] A Conversation runs in Studio; its state (messages, `escalated`) is inspected; a Refund interrupt is resumed there
   - [ ] Notes explain why the local `InMemorySaver` was removed for the server
-- **Docs to read:** Run a local server (`/oss/python/langgraph/local-server`); Application structure (`/langsmith/application-structure`); Studio (`/oss/python/langgraph/studio`); Agent Server (`/langsmith/agent-server-overview`). Guide §3.1–3.2.
+- **Docs to read:** [Run a local server](https://docs.langchain.com/oss/python/langgraph/local-server); [Application structure](https://docs.langchain.com/langsmith/application-structure); [Studio](https://docs.langchain.com/oss/python/langgraph/studio); [Agent Server](https://docs.langchain.com/langsmith/agent-server-overview). Guide §3.1–3.2.
 
 ### CIS-5-2 · Create retail and premium assistants and drive runs with the SDK
 - **Epic:** 5 Local server and auth · **Exam section:** Deploy · **Estimate:** 2h · **Labels:** `by-hand` `epic-5` `deploy` `core`
@@ -527,7 +527,7 @@ These are prerequisites the developer doesn't write. Ask Claude for them before 
   - [ ] The premium assistant answers in its persona
   - [ ] A retail Customer calling the premium assistant is still capped at €50
 - **Hints:** `get_client(url=...)`; `client.assistants.create`, `client.threads.create`, `client.runs.wait` / `stream`. Not verified: how assistant configuration reaches the graph in the current version. Check the Assistants page first.
-- **Docs to read:** Assistants (`/langsmith/assistants`); Use threads (`/langsmith/use-threads`); Runs (`/langsmith/runs`); Stateless runs (`/langsmith/stateless-runs`). Guide §3.2.
+- **Docs to read:** [Assistants](https://docs.langchain.com/langsmith/assistants); [Use threads](https://docs.langchain.com/langsmith/use-threads); [Runs](https://docs.langchain.com/langsmith/runs); [Stateless runs](https://docs.langchain.com/langsmith/stateless-runs). Guide §3.2.
 
 ### CIS-5-3 · Add custom auth and prove Customer isolation
 - **Epic:** 5 Local server and auth · **Exam section:** Deploy · **Estimate:** 3h · **Labels:** `by-hand` `epic-5` `deploy` `core` `prove-it`
@@ -541,7 +541,7 @@ These are prerequisites the developer doesn't write. Ask Claude for them before 
   - [ ] `/memories/` notes from A are invisible to B
   - [ ] Notes say which handler fired for each action (specificity rule)
 - **Hints:** Not verified: how a tool reads `langgraph_auth_user` (docs show `config["configurable"]` in a node), and whether `langgraph dev` enforces custom auth. Spike both first.
-- **Docs to read:** Authentication & access control (`/langsmith/auth`); Add custom authentication (`/langsmith/custom-auth`); Make conversations private (`/langsmith/resource-auth`); Isolate store data per user (`/langsmith/store-auth`). Guide §3.6, ADR 0002.
+- **Docs to read:** [Authentication & access control](https://docs.langchain.com/langsmith/auth); [Add custom authentication](https://docs.langchain.com/langsmith/custom-auth); [Make conversations private](https://docs.langchain.com/langsmith/resource-auth); [Isolate store data per user](https://docs.langchain.com/langsmith/store-auth). Guide §3.6, ADR 0002.
 
 ### CIS-5-4 · Approve Refunds from a cli.py review command
 - **Epic:** 5 Local server and auth · **Exam section:** Deploy · **Estimate:** 2h · **Labels:** `by-hand` `epic-5` `deploy` `stretch`
@@ -551,7 +551,7 @@ These are prerequisites the developer doesn't write. Ask Claude for them before 
 - **Acceptance criteria:**
   - [ ] A Customer session shows "awaiting approval"; the Reviewer approves from another terminal; the Customer sees the outcome
   - [ ] A Customer token can't list other Customers' interrupted threads
-- **Docs to read:** Human-in-the-loop using server API (`/langsmith/add-human-in-the-loop`); Use threads.
+- **Docs to read:** [Human-in-the-loop using server API](https://docs.langchain.com/langsmith/add-human-in-the-loop); [Use threads](https://docs.langchain.com/langsmith/use-threads).
 
 ### CIS-5-5 · Serve a web chat page from a custom route
 - **Epic:** 5 Local server and auth · **Exam section:** Deploy · **Estimate:** 3h · **Labels:** `owner-tbd` `epic-5` `deploy` `stretch`
@@ -562,7 +562,7 @@ These are prerequisites the developer doesn't write. Ask Claude for them before 
   - [ ] `langgraph dev` serves the page, and chat works for two different Customer tokens
   - [ ] No OpenAI or LangSmith key reaches the browser (check page source and the network tab)
 - **Hints:** Not verified: whether custom routes are covered by custom auth.
-- **Docs to read:** How to add custom routes (`/langsmith/custom-routes`); Use threads.
+- **Docs to read:** [How to add custom routes](https://docs.langchain.com/langsmith/custom-routes); [Use threads](https://docs.langchain.com/langsmith/use-threads).
 
 ### CIS-5-6 · Call the investigator through RemoteGraph
 - **Epic:** 5 Local server and auth · **Exam section:** Deploy · **Estimate:** 2h · **Labels:** `owner-tbd` `epic-5` `deploy` `stretch`
@@ -573,7 +573,7 @@ These are prerequisites the developer doesn't write. Ask Claude for them before 
   - [ ] Both modes produce a valid `DisputeReport`
   - [ ] Notes compare the two trace shapes and what auth had to be forwarded
   - [ ] ADR 0001 gains a Consequences note
-- **Docs to read:** How to interact with a deployment using RemoteGraph (`/langsmith/use-remote-graph`).
+- **Docs to read:** [How to interact with a deployment using RemoteGraph](https://docs.langchain.com/langsmith/use-remote-graph).
 
 ### CIS-5-7 · Write up Epic 5
 - **Epic:** 5 Local server and auth · **Exam section:** Deploy · **Estimate:** 1h · **Labels:** `by-hand` `epic-5` `deploy` `core`
@@ -599,7 +599,7 @@ These are prerequisites the developer doesn't write. Ask Claude for them before 
   - [ ] Deployment is live, and a tracing project named after it exists
   - [ ] The OpenAI key is stored as a secret, not a plain variable
   - [ ] Notes record the org's region and the deployment's region
-- **Docs to read:** Deploy to Cloud (`/langsmith/deploy-to-cloud-overview`); Create a deployment (`/langsmith/deploy-to-cloud`); Cloud Agent Server environment variables (`/langsmith/env-var-cloud`); Cloud platform features (`/langsmith/cloud-platform-features`). Guide §3.1, §3.5.
+- **Docs to read:** [Deploy to Cloud](https://docs.langchain.com/langsmith/deploy-to-cloud-overview); [Create a deployment](https://docs.langchain.com/langsmith/deploy-to-cloud); [Cloud Agent Server environment variables](https://docs.langchain.com/langsmith/env-var-cloud); [Cloud platform features](https://docs.langchain.com/langsmith/cloud-platform-features). Guide §3.1, §3.5.
 
 ### CIS-6-2 · Re-create assistants and prove isolation in the cloud
 - **Epic:** 6 Cloud deployment · **Exam section:** Deploy · **Estimate:** 1h · **Labels:** `by-hand` `epic-6` `deploy` `stretch` `plus` `prove-it`
@@ -609,7 +609,7 @@ These are prerequisites the developer doesn't write. Ask Claude for them before 
 - **Acceptance criteria:**
   - [ ] Both assistants exist and behave differently
   - [ ] Customer A can't read Customer B's threads on the cloud deployment
-- **Docs to read:** Assistants; Make conversations private.
+- **Docs to read:** [Assistants](https://docs.langchain.com/langsmith/assistants); [Make conversations private](https://docs.langchain.com/langsmith/resource-auth).
 
 ### CIS-6-3 · Rotate the model secret through a new revision
 - **Epic:** 6 Cloud deployment · **Exam section:** Deploy · **Estimate:** 1h · **Labels:** `by-hand` `epic-6` `deploy` `stretch` `plus` `prove-it`
@@ -619,7 +619,7 @@ These are prerequisites the developer doesn't write. Ask Claude for them before 
 - **Acceptance criteria:**
   - [ ] The Revisions table shows the new revision (screenshot)
   - [ ] Runs succeed after the old key is revoked
-- **Docs to read:** Revisions (`/langsmith/deployment-revisions`). Guide §3.5.
+- **Docs to read:** [Revisions](https://docs.langchain.com/langsmith/deployment-revisions). Guide §3.5.
 
 ### CIS-6-4 · Write up storage durability, regions and Epic 6
 - **Epic:** 6 Cloud deployment · **Exam section:** Deploy · **Estimate:** 1h · **Labels:** `by-hand` `epic-6` `deploy` `core`
@@ -630,7 +630,7 @@ These are prerequisites the developer doesn't write. Ask Claude for them before 
   - [ ] A table placing Ciste's threads, checkpoints, `/memories/` store, runs and secrets in Postgres, Redis or the secrets store
   - [ ] Region rules and the "deployment type can't change" fact
   - [ ] Lab 5 cloud "Check yourself" answered (live or from the docs)
-- **Docs to read:** Agent Server; Cloud platform features. The data plane page title couldn't be verified; use Guide §3.3–3.5.
+- **Docs to read:** [Agent Server](https://docs.langchain.com/langsmith/agent-server-overview); [Cloud platform features](https://docs.langchain.com/langsmith/cloud-platform-features). The data plane page title couldn't be verified; use Guide §3.3–3.5.
 
 ---
 
@@ -646,7 +646,7 @@ These are prerequisites the developer doesn't write. Ask Claude for them before 
   - [ ] A Dispute thread's total includes the investigator's runs (compare the sum of trace costs to the thread total)
   - [ ] Dropping the metadata on the nested call once shows the drop (Lab 6 step 2), recorded in notes
   - [ ] Traces can be filtered by Tier
-- **Docs to read:** Configure threads (`/langsmith/threads`); Add metadata and tags to traces (`/langsmith/add-metadata-tags`); Cost tracking; Trace LangGraph agents. Guide §4.3–4.4, Lab 6.
+- **Docs to read:** [Configure threads](https://docs.langchain.com/langsmith/threads); [Add metadata and tags to traces](https://docs.langchain.com/langsmith/add-metadata-tags); [Cost tracking](https://docs.langchain.com/langsmith/cost-tracking); [Trace LangGraph agents](https://docs.langchain.com/langsmith/trace-with-langgraph). Guide §4.3–4.4, Lab 6.
 
 ### CIS-7-2 · Log thumbs-up/down feedback from the CLI
 - **Epic:** 7 Monitoring · **Exam section:** Monitor · **Estimate:** 1h · **Labels:** `by-hand` `epic-7` `monitor` `core`
@@ -657,7 +657,7 @@ These are prerequisites the developer doesn't write. Ask Claude for them before 
   - [ ] Feedback appears on the run, in the Threads tab and on the dashboard
   - [ ] The feedback key name is recorded for alerts (CIS-7-6)
 - **Hints:** Pre-generate the run ID and pass it in the invoke config (`run_id`); `Client.create_feedback(run_id=..., key=..., score=..., trace_id=...)`.
-- **Docs to read:** Log user feedback using the SDK (`/langsmith/attach-user-feedback`). Guide §4.4.
+- **Docs to read:** [Log user feedback using the SDK](https://docs.langchain.com/langsmith/attach-user-feedback). Guide §4.4.
 
 ### CIS-7-3 · Generate about 50 simulated conversations
 - **Epic:** 7 Monitoring · **Exam section:** Monitor · **Estimate:** 2h · **Labels:** `owner-tbd` `epic-7` `monitor` `core`
@@ -668,7 +668,7 @@ These are prerequisites the developer doesn't write. Ask Claude for them before 
   - [ ] At least 50 threads with `persona` metadata, including at least 5 injection and 5 angry
   - [ ] Re-running with the same seed reproduces the persona mix
   - [ ] Actual cost recorded
-- **Docs to read:** Use threads (if run against the server); Log user feedback using the SDK. Guide Lab 7 setup.
+- **Docs to read:** Use threads (if run against the server); [Log user feedback using the SDK](https://docs.langchain.com/langsmith/attach-user-feedback). Guide Lab 7 setup.
 
 ### CIS-7-4 · Add online groundedness and thread-level satisfaction evaluators
 - **Epic:** 7 Monitoring · **Exam section:** Monitor, Test · **Estimate:** 2h · **Labels:** `by-hand` `epic-7` `monitor` `test` `core`
@@ -679,7 +679,7 @@ These are prerequisites the developer doesn't write. Ask Claude for them before 
   - [ ] Roughly 30% of new matching runs get a groundedness score
   - [ ] Completed threads get a satisfaction score after the idle time (note the setting)
   - [ ] A weekly evaluator spend cap is set
-- **Docs to read:** Set up LLM-as-a-judge online evaluators (`/langsmith/online-evaluations-llm-as-judge`); Set up multi-turn online evaluators (`/langsmith/online-evaluations-multi-turn`). Guide §2.7, §4.5, Lab 7.
+- **Docs to read:** [Set up LLM-as-a-judge online evaluators](https://docs.langchain.com/langsmith/online-evaluations-llm-as-judge); [Set up multi-turn online evaluators](https://docs.langchain.com/langsmith/online-evaluations-multi-turn). Guide §2.7, §4.5, Lab 7.
 
 ### CIS-7-5 · Route thumbs-down threads to an annotation queue
 - **Epic:** 7 Monitoring · **Exam section:** Monitor · **Estimate:** 1h · **Labels:** `by-hand` `epic-7` `monitor` `core`
@@ -689,7 +689,7 @@ These are prerequisites the developer doesn't write. Ask Claude for them before 
 - **Acceptance criteria:**
   - [ ] A new thumbs-down thread lands in the queue
   - [ ] One queued thread is added to `ciste-support-v1`
-- **Docs to read:** Set up automation rules (`/langsmith/rules`); Use annotation queues. Guide §4.6.
+- **Docs to read:** [Set up automation rules](https://docs.langchain.com/langsmith/rules); [Use annotation queues](https://docs.langchain.com/langsmith/annotation-queues). Guide §4.6.
 
 ### CIS-7-6 · Configure alerts and inspect a webhook payload
 - **Epic:** 7 Monitoring · **Exam section:** Monitor · **Estimate:** 2h · **Labels:** `by-hand` `epic-7` `monitor` `core` `prove-it`
@@ -700,7 +700,7 @@ These are prerequisites the developer doesn't write. Ask Claude for them before 
   - [ ] All three alerts configured; the preview shows how often each would have fired
   - [ ] One alert fires, and its webhook payload is saved in notes with its `alert_rule_attribute`
 - **Hints:** Not verified: whether alerts are available on the free plan.
-- **Docs to read:** Alerts in LangSmith (`/langsmith/alerts`); Monitor projects with dashboards (`/langsmith/dashboards`). Guide §4.7, Lab 8.
+- **Docs to read:** [Alerts in LangSmith](https://docs.langchain.com/langsmith/alerts); [Monitor projects with dashboards](https://docs.langchain.com/langsmith/dashboards). Guide §4.7, Lab 8.
 
 ### CIS-7-7 · Run an Insights report over the simulated traffic
 - **Epic:** 7 Monitoring · **Exam section:** Monitor · **Estimate:** 1h · **Labels:** `by-hand` `epic-7` `monitor` `stretch` `plus`
@@ -710,7 +710,7 @@ These are prerequisites the developer doesn't write. Ask Claude for them before 
 - **Acceptance criteria:**
   - [ ] Top categories and one failure mode recorded in notes
   - [ ] The two models Insights uses and their roles noted, plus cost
-- **Docs to read:** Discover errors and usage patterns with Insights (`/langsmith/insights`). Guide §4.5.
+- **Docs to read:** [Discover errors and usage patterns with Insights](https://docs.langchain.com/langsmith/insights). Guide §4.5.
 
 ### CIS-7-8 · Log feedback from the web page through POST /feedback
 - **Epic:** 7 Monitoring · **Exam section:** Monitor · **Estimate:** 1h · **Labels:** `owner-tbd` `epic-7` `monitor` `stretch`
@@ -720,7 +720,7 @@ These are prerequisites the developer doesn't write. Ask Claude for them before 
 - **Acceptance criteria:**
   - [ ] Browser feedback appears on the right run
   - [ ] Notes compare this with presigned feedback URLs
-- **Docs to read:** Log user feedback using the SDK; How to add custom routes.
+- **Docs to read:** [Log user feedback using the SDK](https://docs.langchain.com/langsmith/attach-user-feedback); [How to add custom routes](https://docs.langchain.com/langsmith/custom-routes).
 
 ### CIS-7-9 · Scale simulated traffic to 200+ conversations
 - **Epic:** 7 Monitoring · **Exam section:** Monitor · **Estimate:** 1h · **Labels:** `owner-tbd` `epic-7` `monitor` `stretch`
@@ -730,7 +730,7 @@ These are prerequisites the developer doesn't write. Ask Claude for them before 
 - **Acceptance criteria:**
   - [ ] 200+ threads exist; dashboards and online evaluator scores updated
   - [ ] Actual cost recorded
-- **Docs to read:** Monitor projects with dashboards.
+- **Docs to read:** [Monitor projects with dashboards](https://docs.langchain.com/langsmith/dashboards).
 
 ### CIS-7-10 · Write up Epic 7 with Lab 6–8 answers
 - **Epic:** 7 Monitoring · **Exam section:** Monitor · **Estimate:** 1h · **Labels:** `by-hand` `epic-7` `monitor` `core`
@@ -755,7 +755,7 @@ These are prerequisites the developer doesn't write. Ask Claude for them before 
 - **Acceptance criteria:**
   - [ ] At least 3 failing threads added to `ciste-support-v1`
   - [ ] The new or adjusted evaluator fails them on the current baseline
-- **Docs to read:** Manage datasets; Use annotation queues. Guide §2.5, §4.7 playbook.
+- **Docs to read:** [Manage datasets](https://docs.langchain.com/langsmith/manage-datasets); [Use annotation queues](https://docs.langchain.com/langsmith/annotation-queues). Guide §2.5, §4.7 playbook.
 
 ### CIS-8-2 · Fix the failure and confirm it offline and online
 - **Epic:** 8 Close the loop · **Exam section:** Build, Test, Deploy, Monitor · **Estimate:** 2h · **Labels:** `by-hand` `epic-8` `build` `test` `deploy` `monitor` `core` `prove-it`
@@ -766,7 +766,7 @@ These are prerequisites the developer doesn't write. Ask Claude for them before 
   - [ ] The experiment comparison (with repetitions) shows improvement on the new examples without regressions elsewhere
   - [ ] Online evaluator scores on fresh traffic improve; numbers recorded
   - [ ] With Plus, a new revision is visible
-- **Docs to read:** How to compare experiment results; Revisions.
+- **Docs to read:** [How to compare experiment results](https://docs.langchain.com/langsmith/compare-experiment-results); [Revisions](https://docs.langchain.com/langsmith/deployment-revisions).
 
 ### CIS-8-3 · Write the README and the Epic 8 write-up
 - **Epic:** 8 Close the loop · **Exam section:** Build, Test, Deploy, Monitor · **Estimate:** 2h · **Labels:** `by-hand` `epic-8` `build` `test` `deploy` `monitor` `core`
