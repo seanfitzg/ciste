@@ -10,7 +10,7 @@ def get_connection(CISTE_DB_PATH=DB_PATH) -> sqlite3.Connection:
     return sqlite3.connect(CISTE_DB_PATH)
 
 
-def get_account(conn: sqlite3.Connection, customer_id: str) -> Customer:
+def get_customer_account(conn: sqlite3.Connection, customer_id: str) -> Customer:
     customer_row = conn.execute(
         """SELECT c.id, c.name, c.email, c.joined_on, c.tier
         FROM customers c
