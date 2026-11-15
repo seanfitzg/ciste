@@ -12,6 +12,9 @@ Every ticket (GitHub issue and `BACKLOG.md` entry) has exactly one ownership lab
 
 If a ticket has no ownership label, or the request doesn't map to a ticket, treat it as `by-hand` and ask.
 
+## Branch naming
+
+Name branches `issue-<n>-cis-<epic>-<n>-<slug>`, e.g. `issue-17-cis-1-1-account-transaction-tools`. Take the CIS id from the issue title.
 ## References
 
 - `GLOSSARY.md`: use its terms in code, tickets and notes.
