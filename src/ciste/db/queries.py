@@ -1,28 +1,13 @@
 import sqlite3
-from typing import Literal
+from pathlib import Path
 
-from pydantic.dataclasses import dataclass
+from ciste.db.models import Account, Customer, Transaction
 
-AccountTier = Literal["retail", "premium"]
+DB_PATH = Path(__file__).parents[3] / "data" / "ciste.db"
 
+def get_connection(CISTE_DB_PATH=DB_PATH) -> sqlite3.Connection:
+    return sqlite3.connect(CISTE_DB_PATH)
 
-@dataclass
-class Account:
-    id: str
-    customer_id: str
-    iban: str
-    balance_cents: int
-    opened_on: str
-
-
-@dataclass
-class Customer:
-    id: str
-    name: str
-    email: str
-    joined_on: str
-    tier: AccountTier
-    accounts: list[Account] = None
 
 
 def get_account(customer_id: str, conn: sqlite3.Connection) -> Customer:
@@ -48,3 +33,36 @@ def get_account(customer_id: str, conn: sqlite3.Connection) -> Customer:
         if customer_row
         else None
     )
+
+
+def get_transactions(
+    customer_id: str,
+    db_connection: sqlite3.Connection,
+    start_date: str | None = None,
+    end_date: str | None = None,
+    merchant: str | None = None,
+) -> list[Transaction]:
+
+    sql = """SELECT t.id, t.account_id, t.amount_cents, t.posted_on
+            FROM transactions t
+            JOIN accounts a ON t.account_id = a.id
+            WHERE a.customer_id = ?
+            ORDER BY t.posted_on DESC
+            LIMIT 50"""
+
+    params = (customer_id,)
+
+    if start_date is not None and end_date is not None:
+        sql += " AND t.posted_on BETWEEN ? AND ?"
+        params += (start_date, end_date)
+
+    if merchant is not None:
+        sql += " AND t.merchant = ?"
+        params += (merchant,)
+
+    transaction_rows = db_connection.execute(
+        sql,
+        params,
+    ).fetchall()
+
+    return [Transaction(*row) for row in transaction_rows]
