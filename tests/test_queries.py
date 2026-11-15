@@ -15,12 +15,12 @@ def db_connection():
 
 
 def test_get_account(db_connection):
-    customer = get_account("C001", db_connection)
+    customer = get_account(db_connection, "C001")
     assert customer is not None
     assert customer.id == "C001"
     assert customer.accounts is not None
 
 def test_get_transactions(db_connection):
-    transactions = get_transactions("C001", db_connection)
+    transactions = get_transactions(db_connection, "C001")
     assert transactions is not None
     assert len(transactions) > 0

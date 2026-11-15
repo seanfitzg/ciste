@@ -5,12 +5,12 @@ from ciste.db.models import Account, Customer, Transaction
 
 DB_PATH = Path(__file__).parents[3] / "data" / "ciste.db"
 
+
 def get_connection(CISTE_DB_PATH=DB_PATH) -> sqlite3.Connection:
     return sqlite3.connect(CISTE_DB_PATH)
 
 
-
-def get_account(customer_id: str, conn: sqlite3.Connection) -> Customer:
+def get_account(conn: sqlite3.Connection, customer_id: str) -> Customer:
     customer_row = conn.execute(
         """SELECT c.id, c.name, c.email, c.joined_on, c.tier
         FROM customers c
@@ -36,8 +36,8 @@ def get_account(customer_id: str, conn: sqlite3.Connection) -> Customer:
 
 
 def get_transactions(
-    customer_id: str,
     db_connection: sqlite3.Connection,
+    customer_id: str,
     start_date: str | None = None,
     end_date: str | None = None,
     merchant: str | None = None,
@@ -46,9 +46,7 @@ def get_transactions(
     sql = """SELECT t.id, t.account_id, t.amount_cents, t.posted_on
             FROM transactions t
             JOIN accounts a ON t.account_id = a.id
-            WHERE a.customer_id = ?
-            ORDER BY t.posted_on DESC
-            LIMIT 50"""
+            WHERE a.customer_id = ?"""
 
     params = (customer_id,)
 
@@ -59,6 +57,8 @@ def get_transactions(
     if merchant is not None:
         sql += " AND t.merchant = ?"
         params += (merchant,)
+
+    sql += " ORDER BY t.posted_on DESC LIMIT 50"
 
     transaction_rows = db_connection.execute(
         sql,
